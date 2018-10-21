@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import 'semantic-ui-css/semantic.min.css';
 import { Button, Header, Icon, Menu, Container, Sidebar, Dropdown } from 'semantic-ui-react'
+import { Subscribe } from 'unstated'
+
+import CounterContainer from './CounterState'
 
 class App extends Component {
   state = { 
@@ -112,7 +115,14 @@ class App extends Component {
 
           <Sidebar.Pusher>
             <Container fluid style={{height: this.state.height}}>
-              <Header as='h3'>Application Content</Header>
+              <Subscribe to={[CounterContainer]}>
+                {counter => (
+                  <div>
+                  <Header as='h3'>Application Content</Header>
+                  <span>{counter.state.count}</span>
+                  </div>
+                )}
+              </Subscribe>
             </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>

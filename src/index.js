@@ -1,12 +1,34 @@
+// @flow
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider, Subscribe, Container } from 'unstated';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import CounterContainer from './CounterState'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
+function Counter() {
+  return (
+    <Subscribe to={[CounterContainer]}>
+      {counter => (
+        <div>
+          <button onClick={() => counter.decrement()}>-</button>
+          <span>{counter.state.count}</span>
+          <button onClick={() => counter.increment()}>+</button>
+        </div>
+      )}
+    </Subscribe>
+  );
+}
+
+
+render(
+  <Provider>
+    <Counter />
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 serviceWorker.unregister();
