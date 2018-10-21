@@ -41,12 +41,14 @@ class App extends Component {
 
   handleSidebarHide = () => this.setState({ visible: false })
 
-//<Button onClick={this.handleButtonClick}>Toggle visibility</Button>
+  /**
+   * Render method()
+   */
   render() {
     const { visible } = this.state
     return (
       <div>
-        <Menu attached='top'>
+        <Menu attached='top' inverted>
           <Menu.Item icon='bars' simple
             onClick={this.handleButtonClick}
           />
