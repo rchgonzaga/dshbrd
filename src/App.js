@@ -3,8 +3,22 @@ import 'semantic-ui-css/semantic.min.css';
 import { Button, Header, Icon, Menu, Container, Sidebar, Dropdown } from 'semantic-ui-react'
 import { Subscribe } from 'unstated'
 
-import CounterContainer from './CounterState'
+import AppStateContainer from './AppStateContainer'
 
+function Counter() {
+  return (
+    <Subscribe to={[AppStateContainer]}>{counter => (
+        <div>
+          <button onClick={() => counter.decrement()}>-</button>
+          <span>{counter.state.count}</span>
+          <button onClick={() => counter.increment()}>+</button>
+        </div>
+  )}</Subscribe>
+  );
+}
+
+    
+    
 class App extends Component {
   state = { 
     visible: false,
@@ -50,6 +64,7 @@ class App extends Component {
   render() {
     const { visible } = this.state
     return (
+      <Subscribe to={[AppStateContainer]}>{counter => (
       <div>
         <Menu attached='top' inverted>
           <Menu.Item icon='bars' simple
@@ -101,7 +116,7 @@ class App extends Component {
           >
             <Menu.Item as='a'>
               <Icon name='home' />
-              Home
+              <Counter />
             </Menu.Item>
             <Menu.Item as='a'>
               <Icon name='gamepad' />
@@ -115,18 +130,15 @@ class App extends Component {
 
           <Sidebar.Pusher>
             <Container fluid style={{height: this.state.height}}>
-              <Subscribe to={[CounterContainer]}>
-                {counter => (
                   <div>
                   <Header as='h3'>Application Content</Header>
                   <span>{counter.state.count}</span>
                   </div>
-                )}
-              </Subscribe>
             </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>
+      )}</Subscribe>
     );
   }
 }

@@ -5,7 +5,9 @@ type CounterState = {
   count: number
 };
 
-class CounterContainer extends Container<CounterState> {
+
+// class CounterContainer extends Container<CounterState> {
+class CounterContainer extends Container {
   state = {
     count: 0
   };
