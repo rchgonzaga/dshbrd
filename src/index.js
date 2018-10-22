@@ -5,5 +5,10 @@ import { Provider } from 'unstated';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-render(<Provider><App /></Provider>, document.getElementById('root'));
+render(
+  <Provider>
+    <App />
+  </Provider>, 
+  document.getElementById('root')
+);
 serviceWorker.unregister();

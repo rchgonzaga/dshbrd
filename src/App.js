@@ -5,7 +5,7 @@ import { Subscribe } from 'unstated'
 
 import AppStateContainer from './state/AppStateContainer'
 
-function Counter() {
+const Counter = () => {
   return (
     <Subscribe to={[AppStateContainer]}>{counter => (
         <div>
@@ -54,6 +54,8 @@ class App extends Component {
     // }
   }
 
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   handleButtonClick = () => this.setState({ visible: !this.state.visible })
 
   handleSidebarHide = () => this.setState({ visible: false })
@@ -62,7 +64,7 @@ class App extends Component {
    * Render method()
    */
   render() {
-    const { visible } = this.state
+    const { visible, activeItem } = this.state
     return (
       <Subscribe to={[AppStateContainer]}>{counter => (
       <div>
@@ -70,6 +72,22 @@ class App extends Component {
           <Menu.Item icon='bars' simple
             onClick={this.handleButtonClick}
           />
+
+          <Menu.Item
+            name='item1'
+            active={activeItem === 'item1'}
+            onClick={this.handleItemClick}
+          >
+            Item 1
+          </Menu.Item>
+
+          <Menu.Item
+            name='item2'
+            active={activeItem === 'item2'}
+            onClick={this.handleItemClick}
+          >
+            Item 2
+          </Menu.Item>
 
           <Dropdown item icon='wrench' simple>
             <Dropdown.Menu>
