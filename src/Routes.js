@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-import Home from "./pages/Home";
-import Foo from "./pages/Foo";
-import Bar from "./pages/Bar";
+import Home from './pages/Home'
+import Foo from './pages/Foo'
+import Bar from './pages/Bar'
 
 class Routes extends React.Component {
     render() {

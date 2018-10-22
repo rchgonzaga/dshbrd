@@ -4,6 +4,7 @@ import { Button, Header, Icon, Menu, Container, Sidebar, Dropdown } from 'semant
 import { Subscribe } from 'unstated'
 
 import AppStateContainer from './state/AppStateContainer'
+import Routes from "./Routes";
 
 const Counter = () => {
   return (
@@ -151,6 +152,7 @@ class App extends Component {
                   <div>
                   <Header as='h3'>Application Content</Header>
                   <span>{counter.state.count}</span>
+                  <Routes />
                   </div>
             </Container>
           </Sidebar.Pusher>
