@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import {
-    Button,
     Header,
     Icon,
     Menu,
@@ -155,6 +154,7 @@ class Routes extends React.Component {
                                 <Menu.Item as="a">
                                     <Icon name="camera" />
                                     Channels
+                                    <Counter />
                                 </Menu.Item>
                             </Sidebar>
 

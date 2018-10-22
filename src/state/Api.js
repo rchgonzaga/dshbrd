@@ -5,39 +5,40 @@ import { Provider, Subscribe, Container } from 'unstated'
 // hold state and methods just like a react component would:
 export class ApiContainer extends Container {
     constructor() {
-        super();
+        super()
 
         // The state will be available to any component we inject
         // the Container instance into
         this.state = {
-            loggedIn: false
-        };
+            loggedIn: false,
+            count: 10
+        }
     }
 
     increment() {
-        this.setState({ count: this.state.count + 1 });
+        this.setState({ count: this.state.count + 10 })
     }
 
     decrement() {
-        this.setState({ count: this.state.count - 1 });
+        this.setState({ count: this.state.count - 1 })
     }
     
     // These methods will also be avaiable anywhere we inject our
     // container context
     async login() {
-        console.log("Logging in");
-        this.setState({ loggedIn: true });
+        console.log("Logging in")
+        this.setState({ loggedIn: true })
     }
 
     async logout() {
-        console.log("Logging out");
-        this.setState({ loggedIn: false });
+        console.log("Logging out")
+        this.setState({ loggedIn: false })
     }
 }
 
 // Following the Singleton Service pattern (think Angular Service),
 // we will instantiate the Container from within this module
-const Api = new ApiContainer();
+const Api = new ApiContainer()
 
 // Then we will wrap the provider and subscriber inside of functional
 // React components. This simplifies the resuse of the module as we
@@ -47,16 +48,16 @@ const Api = new ApiContainer();
 export const ApiProvider = props => {
     // We leave the injector flexible, so you can inject a new dependency
     // at any time, eg: snapshot testing
-    return <Provider inject={props.inject || [Api]}>{props.children}</Provider>;
-};
+    return <Provider inject={props.inject || [Api]}>{props.children}</Provider>
+}
 
 export const ApiSubscribe = props => {
     // We also leave the subscribe "to" flexible, so you can have full
     // control over your subscripton from outside of the module
-    return <Subscribe to={props.to || [Api]}>{props.children}</Subscribe>;
-};
+    return <Subscribe to={props.to || [Api]}>{props.children}</Subscribe>
+}
 
-export default Api;
+export default Api
 
 // IMPORT NOTE:
 // With the above export structure, we have the ability to

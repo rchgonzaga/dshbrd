@@ -8,7 +8,7 @@ const Bar = () => {
         <ApiSubscribe to={[Api]}>
             {api => (
                 <div>
-                    <h1>🍺 Bar</h1>
+                    <h1>🍺 Bar - tttttttt</h1>
                     <pre>
                         api.state.loggedIn = {api.state.loggedIn ? "👍 true" : "👎 false"}
                     </pre>
