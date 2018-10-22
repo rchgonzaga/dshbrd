@@ -1,11 +1,6 @@
 
 import { Provider, Subscribe, Container } from 'unstated';
 
-type CounterState = {
-  count: number
-};
-
-
 // class CounterContainer extends Container<CounterState> {
 class CounterContainer extends Container {
   state = {

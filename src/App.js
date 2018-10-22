@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Button, Header, Icon, Menu, Container, Sidebar, Dropdown } from 'semantic-ui-react'
 import { Subscribe } from 'unstated'
 
-import AppStateContainer from './AppStateContainer'
+import AppStateContainer from './state/AppStateContainer'
 
 function Counter() {
   return (
