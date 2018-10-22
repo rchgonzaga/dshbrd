@@ -136,7 +136,7 @@ class Routes extends React.Component {
                         <Sidebar.Pushable>
                             <Sidebar
                                 as={Menu}
-                                animation="overlay"
+                                animation="push"
                                 icon="labeled"
                                 inverted
                                 onHide={this.handleSidebarHide}
