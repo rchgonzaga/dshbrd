@@ -55,12 +55,12 @@ class Routes extends React.Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  handleButtonClick = () => this.setState({ visible: !this.state.visible })
+  // handleButtonClick = () => this.setState({ visible: !this.state.visible })
 
   handleSidebarHide = () => this.setState({ visible: false })
 
   render() {
-    const { visible, activeItem } = this.state
+    const { activeItem } = this.state
     return (
       <Subscribe to={[ApiSubscribe]}>
         {appContainer => (
@@ -72,7 +72,7 @@ class Routes extends React.Component {
                 <Menu.Item
                   icon='bars'
                   simple='true'
-                  onClick={this.handleButtonClick}
+                  onClick={() => appContainer.handleSideMenu()}
                 />
               ) : (
                 ''
@@ -163,7 +163,7 @@ class Routes extends React.Component {
                 inverted
                 onHide={this.handleSidebarHide}
                 vertical
-                visible={visible}
+                visible={appContainer.state.sideMenuVisible}
                 width='thin'
                 style={{ display: appContainer.state.loggedIn ? '' : 'none', backgroundColor: '#055885' }}
               >

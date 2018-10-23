@@ -14,6 +14,7 @@ export class ApiContainer extends Container {
     // the Container instance into
     this.state = {
       loggedIn: false,
+      sideMenuVisible: false,
       count: 10
     }
   }
@@ -24,6 +25,10 @@ export class ApiContainer extends Container {
 
   decrement() {
     this.setState({ count: this.state.count - 1 })
+  }
+
+  async handleSideMenu() {
+    this.setState({sideMenuVisible: !this.state.sideMenuVisible})
   }
 
   // These methods will also be avaiable anywhere we inject our
