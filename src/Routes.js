@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import { Subscribe } from "unstated";
 
-import AppStateContainer from "./state/AppStateContainer";
+import ApiSubscribe from "./state/Api";
 
 import Home from "./pages/Home";
 import Foo from "./pages/Foo";
@@ -19,7 +19,7 @@ import Bar from "./pages/Bar";
 
 const Counter = () => {
     return (
-        <Subscribe to={[AppStateContainer]}>
+        <Subscribe to={[ApiSubscribe]}>
             {counter => (
                 <div>
                     <button onClick={() => counter.decrement()}>-</button>
@@ -75,11 +75,11 @@ class Routes extends React.Component {
     render() {
         const { visible, activeItem } = this.state;
         return (
-            <Subscribe to={[AppStateContainer]}>
+            <Subscribe to={[ApiSubscribe]}>
                 {counter => (
                     <div>
                         <Menu attached="top" inverted>
-                            <Menu.Item icon="bars" simple onClick={this.handleButtonClick} />
+                            <Menu.Item icon="bars" simple="true" onClick={this.handleButtonClick} />
 
                             <Menu.Item
                                 name="item1"
