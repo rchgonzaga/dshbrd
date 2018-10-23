@@ -1,39 +1,42 @@
-import React from 'react'
-import { Provider, Subscribe, Container } from 'unstated'
+import React from "react"
+import { Provider, Subscribe, Container } from "unstated"
+
+import UNSTATED from "unstated-debug"
+UNSTATED.logStateChanges = true
 
 // Create a Container for our React Context. This container will
 // hold state and methods just like a react component would:
 export class ApiContainer extends Container {
-    constructor() {
-        super()
+  constructor() {
+    super()
 
-        // The state will be available to any component we inject
-        // the Container instance into
-        this.state = {
-            loggedIn: false,
-            count: 10
-        }
+    // The state will be available to any component we inject
+    // the Container instance into
+    this.state = {
+      loggedIn: false,
+      count: 10
     }
+  }
 
-    increment() {
-        this.setState({ count: this.state.count + 10 })
-    }
+  increment() {
+    this.setState({ count: this.state.count + 10 })
+  }
 
-    decrement() {
-        this.setState({ count: this.state.count - 1 })
-    }
-    
-    // These methods will also be avaiable anywhere we inject our
-    // container context
-    async login() {
-        console.log("Logging in")
-        this.setState({ loggedIn: true })
-    }
+  decrement() {
+    this.setState({ count: this.state.count - 1 })
+  }
 
-    async logout() {
-        console.log("Logging out")
-        this.setState({ loggedIn: false })
-    }
+  // These methods will also be avaiable anywhere we inject our
+  // container context
+  async login() {
+    console.log("Logging in")
+    this.setState({ loggedIn: true })
+  }
+
+  async logout() {
+    console.log("Logging out")
+    this.setState({ loggedIn: false })
+  }
 }
 
 // Following the Singleton Service pattern (think Angular Service),
@@ -46,15 +49,15 @@ const Api = new ApiContainer()
 // to import Unstated and/or create React Contexts  manually in the
 // places that we want to Provide/Subscribe to the API Service.
 export const ApiProvider = props => {
-    // We leave the injector flexible, so you can inject a new dependency
-    // at any time, eg: snapshot testing
-    return <Provider inject={props.inject || [Api]}>{props.children}</Provider>
+  // We leave the injector flexible, so you can inject a new dependency
+  // at any time, eg: snapshot testing
+  return <Provider inject={props.inject || [Api]}>{props.children}</Provider>
 }
 
 export const ApiSubscribe = props => {
-    // We also leave the subscribe "to" flexible, so you can have full
-    // control over your subscripton from outside of the module
-    return <Subscribe to={props.to || [Api]}>{props.children}</Subscribe>
+  // We also leave the subscribe "to" flexible, so you can have full
+  // control over your subscripton from outside of the module
+  return <Subscribe to={props.to || [Api]}>{props.children}</Subscribe>
 }
 
 export default Api
