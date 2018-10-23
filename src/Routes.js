@@ -17,6 +17,7 @@ import Home from "./pages/Home"
 import Foo from "./pages/Foo"
 import Bar from "./pages/Bar"
 import Counter from "./components/Counter"
+import LoginLogoutButton from "./components/LoginLogoutButtons";
 
 class Routes extends React.Component {
   state = {
@@ -167,13 +168,7 @@ class Routes extends React.Component {
                 <Menu.Menu position="right">
                   <div className="ui right aligned category search item">
                     <div className="ui transparent icon input">
-                      <Counter />
-                      <input
-                        className="prompt"
-                        type="text"
-                        placeholder="Search animals..."
-                      />
-                      <i className="search link icon" />
+                      <LoginLogoutButton />
                     </div>
                     <div className="results" />
                   </div>

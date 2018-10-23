@@ -15,8 +15,6 @@ const Home = () => {
                     <pre>
                         api.state.loggedIn = {api.state.loggedIn ? "👍 true" : "👎 false"}
                     </pre>
-                    <button onClick={() => api.login()}>Login</button>
-                    <button onClick={() => api.logout()}>Logout</button>
                 </div>
             )}
         </ApiSubscribe>
