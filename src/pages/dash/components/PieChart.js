@@ -9,6 +9,13 @@ export class PieChart extends React.Component {
         };
     }
 
+    componentDidUpdate(prevProps) {
+        // // Typical usage (don't forget to compare props):
+        if (this.state.innerData !== prevProps.data) {
+            this.setState({innerData: prevProps.data})
+        }
+    }
+
     render() {
         return (
             <div style={{ width: 700, height: 400 }}>

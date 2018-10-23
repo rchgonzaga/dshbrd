@@ -14,10 +14,8 @@ const Foo = () => {
                         api.state.loggedIn = {api.state.loggedIn ? "👍 true" : "👎 false"}
                     </pre>
                     asdsad
-                    <PieChart
-                        data={api.state.barData}
-                    />
-                    {JSON.stringify(api.state.barData)}
+                    <PieChart data={api.state.barData} />
+                    {/*JSON.stringify(api.state.barData)*/}
                     
                     <button onClick={() => api.changeAiMothaFocka()}>+</button>
                 </div>

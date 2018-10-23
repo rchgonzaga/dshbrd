@@ -62,31 +62,31 @@ export class ApiContainer extends Container {
         {
           id: "elixir",
           label: "elixir",
-          value: 12,
+          value: Math.floor(Math.random() * 100) + 1,
           color: "hsl(173, 70%, 50%)"
         },
         {
           id: "erlang",
           label: "erlang",
-          value: 44,
+          value: Math.floor(Math.random() * 100) + 1,
           color: "hsl(240, 70%, 50%)"
         },
         {
           id: "scala",
           label: "scala",
-          value: 19,
+          value: Math.floor(Math.random() * 100) + 1,
           color: "hsl(145, 70%, 50%)"
         },
         {
           id: "lisp",
           label: "lisp",
-          value: 67,
+          value: Math.floor(Math.random() * 100) + 1,
           color: "hsl(225, 70%, 50%)"
         },
         {
           id: "rust",
           label: "rust",
-          value: 12,
+          value: Math.floor(Math.random() * 100) + 1,
           color: "hsl(230, 70%, 50%)"
         }
       ]
