@@ -15,7 +15,39 @@ export class ApiContainer extends Container {
     this.state = {
       loggedIn: false,
       sideMenuVisible: false,
-      count: 10
+      count: 10,
+      barData: [
+        {
+          id: "elixir",
+          label: "elixir",
+          value: 250,
+          color: "hsl(173, 70%, 50%)"
+        },
+        {
+          id: "erlang",
+          label: "erlang",
+          value: 493,
+          color: "hsl(240, 70%, 50%)"
+        },
+        {
+          id: "scala",
+          label: "scala",
+          value: 455,
+          color: "hsl(145, 70%, 50%)"
+        },
+        {
+          id: "lisp",
+          label: "lisp",
+          value: 490,
+          color: "hsl(225, 70%, 50%)"
+        },
+        {
+          id: "rust",
+          label: "rust",
+          value: 211,
+          color: "hsl(230, 70%, 50%)"
+        }
+      ]
     }
   }
 
@@ -23,12 +55,50 @@ export class ApiContainer extends Container {
     this.setState({ count: this.state.count + 10 })
   }
 
+  changeAiMothaFocka() {
+    console.log('-------------------')
+    this.setState({
+      barData: [
+        {
+          id: "elixir",
+          label: "elixir",
+          value: 12,
+          color: "hsl(173, 70%, 50%)"
+        },
+        {
+          id: "erlang",
+          label: "erlang",
+          value: 44,
+          color: "hsl(240, 70%, 50%)"
+        },
+        {
+          id: "scala",
+          label: "scala",
+          value: 19,
+          color: "hsl(145, 70%, 50%)"
+        },
+        {
+          id: "lisp",
+          label: "lisp",
+          value: 67,
+          color: "hsl(225, 70%, 50%)"
+        },
+        {
+          id: "rust",
+          label: "rust",
+          value: 12,
+          color: "hsl(230, 70%, 50%)"
+        }
+      ]
+    })
+  }
+
   decrement() {
     this.setState({ count: this.state.count - 1 })
   }
 
   async handleSideMenu() {
-    this.setState({sideMenuVisible: !this.state.sideMenuVisible})
+    this.setState({ sideMenuVisible: !this.state.sideMenuVisible })
   }
 
   // These methods will also be avaiable anywhere we inject our
