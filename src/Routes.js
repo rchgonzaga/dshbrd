@@ -224,10 +224,6 @@ class Routes extends React.Component {
                       <Header as="h3">Application Content</Header>
                       <span>{appContainer.state.count}</span>
                       <div>
-                        <Link to="/">Home</Link> |&nbsp;
-                        <Link to="/foo">Foo</Link> |&nbsp;
-                        <Link to="/bar">Bar</Link>
-                        <hr />
                         <Route exact path="/" component={Home} />
                         <Route path="/foo" component={Foo} />
                         <Route path="/bar" component={Bar} />
