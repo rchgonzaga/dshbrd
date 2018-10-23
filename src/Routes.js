@@ -23,7 +23,7 @@ class Routes extends React.Component {
     visible: false,
     width: 800,
     height: 182,
-    activeItem: ''
+    activeItem: ""
   }
 
   /**
@@ -55,7 +55,7 @@ class Routes extends React.Component {
   }
 
   handleItemClick = (e, { name }) => {
-    console.log(name);
+    console.log(name)
     this.setState({ activeItem: name })
   }
 
@@ -92,9 +92,6 @@ class Routes extends React.Component {
                   <Menu.Item
                     active={activeItem === "home"}
                     onClick={this.handleItemClick}
-                    style={{
-                      display: appContainer.state.loggedIn ? "" : "none"
-                    }}
                     as={Link}
                     name="home"
                     to="/"
@@ -110,14 +107,26 @@ class Routes extends React.Component {
                   <Menu.Item
                     active={activeItem === "foo"}
                     onClick={this.handleItemClick}
-                    style={{
-                      display: appContainer.state.loggedIn ? "" : "none"
-                    }}
                     as={Link}
                     name="foo"
                     to="/foo"
                   >
                     Foo
+                  </Menu.Item>
+                ) : (
+                  ""
+                )}
+
+                {/* Shows only if logged = true */}
+                {appContainer.state.loggedIn ? (
+                  <Menu.Item
+                    active={activeItem === "bar"}
+                    onClick={this.handleItemClick}
+                    as={Link}
+                    name="bar"
+                    to="/bar"
+                  >
+                    Bar
                   </Menu.Item>
                 ) : (
                   ""
