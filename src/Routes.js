@@ -199,11 +199,11 @@ class Routes extends React.Component {
                                         <Menu.Item as="a">
                                             <Icon name="gamepad" />
                                             Games
-                    </Menu.Item>
+                                        </Menu.Item>
                                         <Menu.Item as="a">
                                             <Icon name="camera" />
                                             Channels
-                      <Counter />
+                                            <Counter />
                                         </Menu.Item>
                                     </Sidebar>
                                 ) : (
@@ -216,8 +216,6 @@ class Routes extends React.Component {
                                         style={{ height: this.state.height, padding: "10px" }}
                                     >
                                         <div>
-                                            <Header as="h3">Application Content</Header>
-                                            <span>{appContainer.state.count}</span>
                                             <div>
                                                 <Route exact path="/" component={Home} />
                                                 <Route path="/foo" component={Foo} />

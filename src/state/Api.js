@@ -56,7 +56,6 @@ export class ApiContainer extends Container {
   }
 
   changeAiMothaFocka() {
-    console.log('-------------------')
     this.setState({
       barData: [
         {

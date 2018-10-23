@@ -5,7 +5,9 @@ export class PieChart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            innerData: this.props.data
+            innerData: this.props.data,
+            innerWidth: this.props.width,
+            innerHeight: this.props.height
         };
     }
 
@@ -18,7 +20,7 @@ export class PieChart extends React.Component {
 
     render() {
         return (
-            <div style={{ width: 700, height: 400 }}>
+            <div style={{ width: this.state.innerWidth, height: this.state.innerHeight }}>
                 <ResponsivePie
                     data={this.state.innerData}
                     margin={{
