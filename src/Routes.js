@@ -6,7 +6,7 @@ import { Subscribe } from "unstated"
 
 import Api, { ApiSubscribe } from "./state/Api"
 
-import Home from "./pages/Home"
+import DashCloudLegacy from "./pages/dash/DashCloudLegacy"
 import Foo from "./pages/Foo"
 import Bar from "./pages/Bar"
 import Counter from "./components/Counter"
@@ -86,7 +86,7 @@ class RoutesChild extends React.Component {
                                 name="home"
                                 to="/"
                             >
-                                Home
+                                ITS Cloud & Legacy
                             </Menu.Item>
                         ) : (
                                 ""
@@ -101,7 +101,7 @@ class RoutesChild extends React.Component {
                                 name="foo"
                                 to="/foo"
                             >
-                                Foo
+                                POD PY & AR
                             </Menu.Item>
                         ) : (
                                 ""
@@ -116,8 +116,8 @@ class RoutesChild extends React.Component {
                                 name="bar"
                                 to="/bar"
                             >
-                                Bar
-                                    </Menu.Item>
+                                Barter
+                            </Menu.Item>
                         ) : (
                                 ""
                             )}
@@ -206,7 +206,7 @@ class RoutesChild extends React.Component {
                             >
                                 <div>
                                     <div>
-                                        <Route exact path="/" component={Home} />
+                                        <Route exact path="/" component={DashCloudLegacy} />
                                         <Route path="/foo" component={Foo} />
                                         <Route path="/bar" component={Bar} />
                                     </div>

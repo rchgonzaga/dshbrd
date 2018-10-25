@@ -2,14 +2,14 @@ import React from "react"
 import { Grid, Button } from "semantic-ui-react"
 
 // Import our Api Service Subscriber
-import Api, { ApiSubscribe } from "../state/Api"
-import { PieChart } from "./dash/components/PieChart"
-import Hr from "../components/Hr"
-import LoaderSpinner from "../components/Loader"
-import { HorizontalGroupedBars } from "./dash/components/HorizontalGroupedBars"
-import StatisticItems from "./dash/components/StatisticItems";
-import MainGrid from "./dash/components/MainGrid";
-import HomeApi from "../state/HomeState";
+import Api, { ApiSubscribe } from "../../state/Api"
+import { PieChart } from "../dash/components/PieChart"
+import Hr from "../../components/Hr"
+import LoaderSpinner from "../../components/Loader"
+import { HorizontalGroupedBars } from "../dash/components/HorizontalGroupedBars"
+import StatisticItems from "../dash/components/StatisticItems";
+import MainGrid from "../dash/components/MainGrid";
+import HomeApi from "../../state/HomeState";
 
 class HomeChild extends React.Component {
 
