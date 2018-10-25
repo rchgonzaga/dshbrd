@@ -1,8 +1,10 @@
 import React from "react"
 import { Provider, Subscribe, Container } from "unstated"
+import Sessions from '../services/api/session/index'
 
 import UNSTATED from "unstated-debug"
 UNSTATED.logStateChanges = true
+
 
 // Create a Container for our React Context. This container will
 // hold state and methods just like a react component would:
@@ -15,6 +17,7 @@ export class ApiContainer extends Container {
     this.state = {
       loggedIn: false,
       sideMenuVisible: false,
+      isLoadingSession: false,
       count: 10,
       barData: [
         {
@@ -198,6 +201,21 @@ export class ApiContainer extends Container {
       ]
     })
   }
+
+    getCurrentSession() {
+        this.setState({
+            isLoadingSession: true
+        })
+        Sessions.getSession().then(data => {
+            console.log('Data:', data)
+            this.setState({
+                albumList: data.results
+            })
+            this.setState({
+                isLoadingSession: false
+            })
+        })
+    }
 
   decrement() {
     this.setState({ count: this.state.count - 1 })

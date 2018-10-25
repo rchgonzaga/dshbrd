@@ -7,12 +7,15 @@ import matchSorter from "match-sorter"
 import { ApiSubscribe } from "../state/Api"
 import { PieChart } from "./dash/components/PieChart"
 import Hr from "../components/Hr"
+import LoaderSpinner from '../components/Loader'
 import { HorizontalGroupedBars } from "./dash/components/HorizontalGroupedBars"
 
 const Home = () => {
   return (
     <ApiSubscribe>
       {api => (
+        <div>
+        {api.state.isLoadingSession == false ? (
         <div>
           <h1>🏠 Home</h1>
           <Hr />
@@ -109,10 +112,22 @@ const Home = () => {
                 <button onClick={() => api.changeAiMothaFocka()}>
                   changeIt
                 </button>
+                <button onClick={() => api.getCurrentSession()}>
+                  getCurrentSession()
+                </button>
+                {api.state.isLoadingSession == false ? (
+                  <div>Asdasdadas</div>
+                ) : (
+                  <LoaderSpinner />
+                )}
               </Grid.Column>
               <Grid.Column>adasdsa</Grid.Column>
             </Grid.Row>
           </Grid>
+        </div>
+        ) : (
+          <LoaderSpinner />
+        )}
         </div>
       )}
     </ApiSubscribe>
