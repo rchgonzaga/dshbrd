@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Icon, Button, Statistic } from "semantic-ui-react"
+import { Grid, Icon, Button } from "semantic-ui-react"
 import ReactTable from "react-table"
 import matchSorter from "match-sorter"
 import moment from "moment";
@@ -176,7 +176,7 @@ class HomeChild extends React.Component {
                         id: "pai_closed_date",
                         accessor: d => {
                             return d.pai_closed_date ?
-                            (d.pai_closed_date != 'null' ? moment(d.pai_closed_date.trim()).format('DD/MM/YYYY') : '') :
+                            (d.pai_closed_date !== 'null' ? moment(d.pai_closed_date.trim()).format('DD/MM/YYYY') : '') :
                             0
                         },
                         width: 100,
@@ -191,7 +191,7 @@ class HomeChild extends React.Component {
 
                             let startDate = moment(d.pai_submit_date, "YYYY-MM-DD");
                             let endDate = moment(d.pai_closed_date, "YYYY-MM-DD");
-                            if (d.pai_closed_date == 'null') {
+                            if (d.pai_closed_date === 'null') {
                                 endDate = moment(moment(Date()).format('YYYY-MM-DD'), "YYYY-MM-DD");
                             }
 

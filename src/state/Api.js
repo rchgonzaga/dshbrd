@@ -1,6 +1,6 @@
 import React from "react"
 import { Provider, Subscribe, Container } from "unstated"
-import Sessions from '../services/api/session/index'
+import Sessions from '../services/api/tickets/index'
 
 import UNSTATED from "unstated-debug"
 UNSTATED.logStateChanges = true

@@ -1,4 +1,4 @@
-export default class SessionsService {
+export default class TicketsService {
   /**
    * Get Current session
    * @returns {Promise}

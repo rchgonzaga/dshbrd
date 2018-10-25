@@ -1,8 +1,8 @@
-import SessionsService from "./services/SessionsService";
+import TicketsService from "./services/TicketsService";
 
 export class Sessions {
   constructor() {
-    this.service = new SessionsService(this);
+    this.service = new TicketsService(this);
     return this.service;
   }
 }
