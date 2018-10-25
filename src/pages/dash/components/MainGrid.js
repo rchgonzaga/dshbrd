@@ -258,11 +258,6 @@ const MainGrid = props => {
                     },
                     onDoubleClick: (e, handleOriginal) => {
                         console.log("It was in this row:", rowInfo.original);
-                        this.setState({
-                            selectedTicket: rowInfo.original,
-                            showPopup: true
-                        });
-
                         if (handleOriginal) {
                             handleOriginal();
                         }

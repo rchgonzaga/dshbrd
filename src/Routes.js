@@ -87,7 +87,7 @@ class RoutesChild extends React.Component {
                                 to="/"
                             >
                                 Home
-                                    </Menu.Item>
+                            </Menu.Item>
                         ) : (
                                 ""
                             )}
@@ -102,7 +102,7 @@ class RoutesChild extends React.Component {
                                 to="/foo"
                             >
                                 Foo
-                                    </Menu.Item>
+                            </Menu.Item>
                         ) : (
                                 ""
                             )}
