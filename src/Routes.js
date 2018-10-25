@@ -204,7 +204,7 @@ class Routes extends React.Component {
                 <Sidebar.Pusher>
                   <Container
                     fluid
-                    style={{ height: this.state.height, padding: "10px" }}
+                    style={{ height: this.state.height, padding: "10px", overflowX: 'hidden', overflowY: 'auto' }}
                   >
                     <div>
                       <div>
