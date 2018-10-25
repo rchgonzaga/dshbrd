@@ -7,7 +7,7 @@ import matchSorter from "match-sorter"
 import { ApiSubscribe } from "../state/Api"
 import { PieChart } from "./dash/components/PieChart"
 import Hr from "../components/Hr"
-import LoaderSpinner from '../components/Loader'
+import LoaderSpinner from "../components/Loader"
 import { HorizontalGroupedBars } from "./dash/components/HorizontalGroupedBars"
 
 const Home = () => {
@@ -15,119 +15,120 @@ const Home = () => {
     <ApiSubscribe>
       {api => (
         <div>
-        {api.state.isLoadingSession == false ? (
-        <div>
-          <h1>🏠 Home</h1>
-          <Hr />
-          <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column>
-                <PieChart
-                  data={api.state.barData}
-                  width={window.innerWidth / 2}
-                  height={window.innerHeight / 2}
-                />
-              </Grid.Column>
-              <Grid.Column>
-                <HorizontalGroupedBars
-                  data={api.state.pieData}
-                  width={window.innerWidth / 2}
-                  height={window.innerHeight / 2}
-                />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-          <Hr />
-          asdasdas
-          <Hr />
-          <ReactTable
-            data={[]}
-            filterable
-            defaultFilterMethod={(filter, row) =>
-              String(row[filter.id]) === filter.value
-            }
-            columns={[
-              {
-                Header: "Name",
-                columns: [
+          {/* NORMAL STATE */}
+          {api.state.isLoadingSession == false ? (
+            <div>
+              <h1>🏠 Home</h1>
+              <Hr />
+              <Grid columns={2}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <PieChart
+                      data={api.state.barData}
+                      width={window.innerWidth / 2}
+                      height={window.innerHeight / 2}
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <HorizontalGroupedBars
+                      data={api.state.pieData}
+                      width={window.innerWidth / 2}
+                      height={window.innerHeight / 2}
+                    />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+              <Hr />
+              asdasdas
+              <Hr />
+              <ReactTable
+                data={api.state.ticketList}
+                filterable
+                defaultFilterMethod={(filter, row) =>
+                  String(row[filter.id]) === filter.value
+                }
+                columns={[
                   {
-                    Header: "First Name",
-                    accessor: "firstName",
-                    filterMethod: (filter, row) =>
-                      row[filter.id].startsWith(filter.value) &&
-                      row[filter.id].endsWith(filter.value)
+                    Header: "Name",
+                    columns: [
+                      {
+                        Header: "First Name",
+                        accessor: "name",
+                        filterMethod: (filter, row) =>
+                          row[filter.id].startsWith(filter.value) &&
+                          row[filter.id].endsWith(filter.value)
+                      },
+                      {
+                        Header: "Last Name",
+                        id: "username",
+                        accessor: d => d.username,
+                        filterMethod: (filter, rows) =>
+                          matchSorter(rows, filter.value, {
+                            keys: ["username"]
+                          }),
+                        filterAll: true
+                      }
+                    ]
                   },
                   {
-                    Header: "Last Name",
-                    id: "lastName",
-                    accessor: d => d.lastName,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["lastName"] }),
-                    filterAll: true
-                  }
-                ]
-              },
-              {
-                Header: "Info",
-                columns: [
-                  {
-                    Header: "Age",
-                    accessor: "age"
-                  },
-                  {
-                    Header: "Over 21",
-                    accessor: "age",
-                    id: "over",
-                    Cell: ({ value }) => (value >= 21 ? "Yes" : "No"),
-                    filterMethod: (filter, row) => {
-                      if (filter.value === "all") {
-                        return true
+                    Header: "Info",
+                    columns: [
+                      {
+                        Header: "Age",
+                        accessor: "id"
+                      },
+                      {
+                        Header: "Over 3",
+                        accessor: "id",
+                        id: "over",
+                        Cell: ({ value }) => (value >= 3 ? "Yes" : "No"),
+                        filterMethod: (filter, row) => {
+                          if (filter.value === "all") {
+                            return true
+                          }
+                          if (filter.value === "true") {
+                            return row[filter.id] >= 3
+                          }
+                          return row[filter.id] < 3
+                        },
+                        Filter: ({ filter, onChange }) => (
+                          <select
+                            onChange={event => onChange(event.target.value)}
+                            style={{ width: "100%" }}
+                            value={filter ? filter.value : "all"}
+                          >
+                            <option value="all">Show All</option>
+                            <option value="true">Can Drink</option>
+                            <option value="false">Can't Drink</option>
+                          </select>
+                        )
                       }
-                      if (filter.value === "true") {
-                        return row[filter.id] >= 21
-                      }
-                      return row[filter.id] < 21
-                    },
-                    Filter: ({ filter, onChange }) => (
-                      <select
-                        onChange={event => onChange(event.target.value)}
-                        style={{ width: "100%" }}
-                        value={filter ? filter.value : "all"}
-                      >
-                        <option value="all">Show All</option>
-                        <option value="true">Can Drink</option>
-                        <option value="false">Can't Drink</option>
-                      </select>
-                    )
+                    ]
                   }
-                ]
-              }
-            ]}
-            defaultPageSize={10}
-            className="-striped -highlight"
-          />
-          <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column>
-                <button onClick={() => api.changeAiMothaFocka()}>
-                  changeIt
-                </button>
-                <button onClick={() => api.getCurrentSession()}>
-                  getCurrentSession()
-                </button>
-                {api.state.isLoadingSession == false ? (
-                  <div>Asdasdadas</div>
-                ) : (
-                  <LoaderSpinner />
-                )}
-              </Grid.Column>
-              <Grid.Column>adasdsa</Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </div>
-        ) : (
-          <LoaderSpinner />
-        )}
+                ]}
+                defaultPageSize={10}
+                className="-striped -highlight"
+              />
+              <Grid columns={2}>
+                <Grid.Row>
+                  <Grid.Column>
+                    <button onClick={() => api.changeAiMothaFocka()}>
+                      changeIt
+                    </button>
+                    <button onClick={() => api.getCurrentSession()}>
+                      getCurrentSession()
+                    </button>
+                  </Grid.Column>
+                  <Grid.Column>adasdsa</Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </div>
+          ) : (
+            <div>
+              {/* LOADING STATE */}
+              <LoaderSpinner />
+            </div>
+          )}
         </div>
       )}
     </ApiSubscribe>
