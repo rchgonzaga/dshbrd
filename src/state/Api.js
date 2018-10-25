@@ -3,7 +3,7 @@ import { Provider, Subscribe, Container } from "unstated"
 import Sessions from '../services/api/session/index'
 
 import UNSTATED from "unstated-debug"
-UNSTATED.logStateChanges = false
+UNSTATED.logStateChanges = true
 
 
 // Create a Container for our React Context. This container will
@@ -208,7 +208,6 @@ export class ApiContainer extends Container {
             isLoadingSession: true
         })
         Sessions.getSession().then(data => {
-            console.log('Data:', data)
             this.setState({
                 ticketList: data
             })

@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid } from "semantic-ui-react"
+import { Grid, Icon, Button, Statistic } from "semantic-ui-react"
 import ReactTable from "react-table"
 import matchSorter from "match-sorter"
 
@@ -18,6 +18,7 @@ class HomeChild extends React.Component {
   componentDidMount() {
     this.props.api.getCurrentSession()
   }
+
   render() {
     let { api } = this.props
     return (
@@ -25,7 +26,11 @@ class HomeChild extends React.Component {
         {/* NORMAL STATE */}
         {api.state.isLoadingSession == false ? (
           <div>
-            <h1>🏠 Home</h1>
+            <h1>
+              🏠 Home
+              <Button primary onClick={() => api.changeAiMothaFocka()}>Update</Button>
+              <Button secondary onClick={() => api.getCurrentSession()}>Update Grid</Button>
+            </h1>
             <Hr />
             <Grid columns={2}>
               <Grid.Row>
@@ -46,7 +51,38 @@ class HomeChild extends React.Component {
               </Grid.Row>
             </Grid>
             <Hr />
-            asdasdas
+
+            <Statistic.Group widths="four">
+              <Statistic>
+                <Statistic.Value>22</Statistic.Value>
+                <Statistic.Label>Saves</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value text>
+                  Three
+                  <br />
+                  Thousand
+                </Statistic.Value>
+                <Statistic.Label>Signups</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value>
+                  <Icon name="hourglass" />5
+                </Statistic.Value>
+                <Statistic.Label>Flights</Statistic.Label>
+              </Statistic>
+
+              <Statistic>
+                <Statistic.Value>
+                  <Icon name="cloud" />
+                  42
+                </Statistic.Value>
+                <Statistic.Label>Team Members</Statistic.Label>
+              </Statistic>
+            </Statistic.Group>
+
             <Hr />
             <ReactTable
               data={api.state.ticketList}
@@ -118,14 +154,7 @@ class HomeChild extends React.Component {
             />
             <Grid columns={2}>
               <Grid.Row>
-                <Grid.Column>
-                  <button onClick={() => api.changeAiMothaFocka()}>
-                    changeIt
-                  </button>
-                  <button onClick={() => api.getCurrentSession()}>
-                    getCurrentSession()
-                  </button>
-                </Grid.Column>
+                <Grid.Column>as</Grid.Column>
                 <Grid.Column>adasdsa</Grid.Column>
               </Grid.Row>
             </Grid>
@@ -141,6 +170,15 @@ class HomeChild extends React.Component {
   }
 }
 
-let Home = () => <ApiSubscribe>{api => <HomeChild api={api} />}</ApiSubscribe>
+// const Home = () => {
+//   return (
+//     <ApiSubscribe to={[Api]}>
+//       {(api) => (
+//         <HomeChild api={api} />
+//       )}
+//     </ApiSubscribe>
+//     )
+// }
+const Home = () => <ApiSubscribe>{api => <HomeChild api={api} />}</ApiSubscribe>
 
 export default Home
