@@ -1,10 +1,12 @@
 import React from "react";
-import ApiSubscribe from "../state/Api";
+import Api, {ApiSubscribe} from "../state/Api";
 import { Subscribe } from "unstated";
+
+
 
 const Counter = () => {
     return (
-        <Subscribe to={[ApiSubscribe]}>
+        <Subscribe to={[Api]}>
             {counter => (
                 <div>
                     <button onClick={() => counter.decrement()}>-</button>
