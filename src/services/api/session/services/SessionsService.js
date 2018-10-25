@@ -4,15 +4,14 @@ export default class SessionsService {
    * @returns {Promise}
    */
   async getSession() {
-    let data = await (await (fetch('https://jsonplaceholder.typicode.com/users')
+    let data = await fetch("http://10.184.248.123:8080/relations")
       .then(res => {
-        return res.json()
+        return res.json();
       })
       .catch(err => {
-        console.log('Error: ', err)
-      })
-    ))
-    return data
+        console.log("Error: ", err);
+      });
+    return data;
   }
-
 }
+
