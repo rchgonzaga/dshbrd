@@ -19,16 +19,19 @@ class HomeChild extends React.Component {
 
     render() {
         let { api } = this.props
+        let today  = new Date();
         return (
             <div>
                 {/* NORMAL STATE */}
                 {api.state.isLoadingSession === false ? (
                     <div>
-                        <h1>
-                            🏠 Home
+                        <h2>
+                            Dashboard - <span style={{ color: 'grey' }}>01/06/2018 ~ {today.toLocaleDateString("pt-BR")}</span>
+                        &nbsp;&nbsp; | &nbsp;&nbsp; Last update: <span style={{ color: 'grey' }}> {today.toLocaleDateString("pt-BR")} &nbsp;&nbsp;
                             <Button primary onClick={() => api.changeAiMothaFocka()}>Update</Button>
                             <Button secondary onClick={() => api.getCurrentSession()}>Update Grid</Button>
-                        </h1>
+                            </span>
+                        </h2>
                         <Hr />
                         <Grid columns={2}>
                             <Grid.Row>
