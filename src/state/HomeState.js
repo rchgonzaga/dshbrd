@@ -3,7 +3,7 @@ import { Provider, Subscribe, Container } from "unstated"
 import Sessions from '../services/api/tickets/index'
 
 import UNSTATED from "unstated-debug"
-UNSTATED.logStateChanges = true
+UNSTATED.logStateChanges = false
 
 
 // Create a Container for our React Context. This container will

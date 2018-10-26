@@ -1,8 +1,8 @@
 import React from "react";
 
 // Import our Api Service Subscriber
-import { ApiSubscribe } from "../state/Api";
-import { PieChart } from "./dash/components/PieChart";
+import { ApiSubscribe } from "../../state/Api";
+import { PieChart } from "../dash/components/PieChart";
 
 const Foo = () => {
     return (

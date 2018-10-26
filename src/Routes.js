@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { Icon, Menu, Container, Sidebar, Dropdown } from "semantic-ui-react"
 import { Subscribe } from "unstated"
 
-import Api, { ApiSubscribe } from "./state/Api"
+import Api from "./state/Api"
 
 import DashCloudLegacy from "./pages/dash/DashCloudLegacy"
-import Foo from "./pages/Foo"
-import Bar from "./pages/Bar"
+import Foo from "./pages/dashpodpyar/DashPodPyAr"
+import Bar from "./pages/barter/Bar"
 import Counter from "./components/Counter"
 import LoginLogoutButton from "./components/LoginLogoutButtons"
 
