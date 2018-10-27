@@ -225,7 +225,7 @@ export default function Routes() {
   const [name, setName] = useState("StateName")
 
   useEffect(() => {
-    document.title = name
+    document.title = name + " - "
   })
 
   return (
