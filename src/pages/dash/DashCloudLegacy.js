@@ -60,11 +60,7 @@ class HomeChild extends React.Component {
                   />
                 </Grid.Column>
                 <Grid.Column>
-                  <UserFaces
-                    data={api.state.pieData}
-                    width={window.innerWidth / 2}
-                    height={window.innerHeight / 2}
-                  />
+                  <UserFaces />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
