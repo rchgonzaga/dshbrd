@@ -40,7 +40,7 @@ class RoutesChild extends React.Component {
    */
   updateDimensions() {
     let update_width = window.innerWidth - 100
-    let update_height = window.innerHeight - 43
+    let update_height = window.innerHeight - 49
     this.setState({ width: update_width, height: update_height })
   }
 

@@ -10,6 +10,7 @@ import { HorizontalGroupedBars } from "../dash/components/HorizontalGroupedBars"
 import StatisticItems from "../dash/components/StatisticItems"
 import MainGrid from "../dash/components/MainGrid"
 import HomeApi from "../../state/HomeState"
+import UserFaces from "../dash/components/UserFaces"
 
 class HomeChild extends React.Component {
   componentDidMount() {
@@ -33,7 +34,7 @@ class HomeChild extends React.Component {
               <span style={{ color: "grey" }}>
                 {" "}
                 {new Date().toLocaleDateString("pt-BR")} &nbsp;&nbsp;
-                <Button primary onClick={() => globalApi.changeAiMothaFocka()}>
+                <Button primary onClick={() => api.changeAiMothaFocka()}>
                   Update
                 </Button>
                 <Button secondary onClick={() => api.getCurrentSession()}>
@@ -42,17 +43,24 @@ class HomeChild extends React.Component {
               </span>
             </h2>
             <Hr />
-            <Grid columns={2}>
+            <Grid columns={3}>
               <Grid.Row>
                 <Grid.Column>
                   <PieChart
                     data={api.state.barData}
-                    width={window.innerWidth / 2}
+                    width={window.innerWidth / 3}
                     height={window.innerHeight / 2}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <HorizontalGroupedBars
+                    data={api.state.pieData}
+                    width={window.innerWidth / 3}
+                    height={window.innerHeight / 2}
+                  />
+                </Grid.Column>
+                <Grid.Column>
+                  <UserFaces
                     data={api.state.pieData}
                     width={window.innerWidth / 2}
                     height={window.innerHeight / 2}
@@ -91,7 +99,9 @@ class HomeChild extends React.Component {
 
 const Home = () => (
   <ApiSubscribe to={[Api, HomeApi]}>
-    {(api, homeApi) => <HomeChild api={homeApi} globalApi={api} />}
+    {(api, homeApi) => {
+      return <HomeChild api={homeApi} globalApi={api} />
+    }}
   </ApiSubscribe>
 )
 
