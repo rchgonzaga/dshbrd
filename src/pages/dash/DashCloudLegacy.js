@@ -73,7 +73,7 @@ class HomeChild extends React.Component {
             <StatisticItems
               data={{
                 originalActivities: api.state.ticketList,
-                totalSubjectClosed: 31,
+                totalSubjectClosed: api.state.ticketList.filter(ticket => ticket.pai_status === 'Closed').length,
                 totalSubjectOpen: api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
                 totalSubjectWaitingUser: api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
                 totalL2Open: 2,

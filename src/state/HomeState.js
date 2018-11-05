@@ -163,6 +163,7 @@ export class HomeContainer extends Container {
                         })
 
                     }
+                    return item
                 })
             }
 
