@@ -142,7 +142,7 @@ export class HomeContainer extends Container {
     }
 
     getCurrentSession() {
-        console.log('getCurrentSession')
+        // console.log('getCurrentSession')
         this.setState({
             isLoadingSession: true
         })
@@ -172,9 +172,9 @@ export class HomeContainer extends Container {
             },
             () => {
 
-                console.log(
-                    this.state.ticketList
-                )
+                // console.log(
+                //     this.state.ticketList
+                // )
 
             })
 

@@ -65,20 +65,26 @@ class HomeChild extends React.Component {
               </Grid.Row>
             </Grid>
             <Hr />
-            {
-              console.log(
-                api.state.ticketList.filter(ticket => ticket.pai_status !== 'Closed' && ticket.filho_status !== 'Closed')
-              )
-            }
+                            
             <StatisticItems
               data={{
                 originalActivities: api.state.ticketList,
                 totalSubjectClosed: api.state.ticketList.filter(ticket => ticket.pai_status === 'Closed').length,
                 totalSubjectOpen: api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
                 totalSubjectWaitingUser: api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
-                totalL2Open: 2,
-                totalL3LegacyOpen: 5,
-                totalL3CloudOpen: 7
+                totalL2Open: api.state.ticketList.filter(
+                  ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L2' && ticket.pai_status === 'Open'
+                ).length,
+                totalL3LegacyOpen: api.state.ticketList.filter(
+                  ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' && 
+                    ticket.pai_status === 'Open' &&
+                    ticket.pai_product.search('Legacy Value Capture Retailer') === 0
+                ).length,
+                totalL3CloudOpen:  api.state.ticketList.filter(
+                  ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' && 
+                    ticket.pai_status === 'Open' &&
+                    ticket.pai_product.search('Value Capture') === 0
+                ).length
               }}
             />
 
