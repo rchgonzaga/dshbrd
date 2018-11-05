@@ -229,7 +229,18 @@ const MainGrid = props => {
         <ReactTable
             data={props.data}
             filterable
-            multiSort={true}
+            multiSort={true} // shift to multi sort
+            sorted={[{
+                    id: 'pai_status',
+                    desc: true
+                }, {
+                    id: 'pai_priority',
+                    desc: false
+                }, {
+                    id: 'pai_submit_dates',
+                    desc: false
+                }
+            ]}
             defaultFilterMethod={(filter, row) =>
                 String(row[filter.id]) === filter.value
             }
@@ -243,11 +254,11 @@ const MainGrid = props => {
             getTrProps={(state, rowInfo, column) => {
                 let clr = "";
 
-                if (rowInfo != undefined) {
+                if (rowInfo !== undefined) {
                     clr =
-                        rowInfo.row.pai_status == "Wating user"
+                        rowInfo.row.pai_status === "Wating user"
                             ? "#e8abab"
-                            : rowInfo.row.pai_status == "Open"
+                            : rowInfo.row.pai_status === "Open"
                                 ? "#b2e8ab"
                                 : "#e1e8e1";
                 }

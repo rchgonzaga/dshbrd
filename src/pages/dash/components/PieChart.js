@@ -29,7 +29,7 @@ export class PieChart extends React.Component {
                         bottom: 80,
                         left: 80
                     }}
-                    colors="nivo"
+                    colors="set3"
                     colorBy="id"
                     borderWidth={1}
                     borderColor="inherit:darker(0.2)"

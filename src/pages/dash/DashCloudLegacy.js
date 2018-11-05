@@ -65,13 +65,17 @@ class HomeChild extends React.Component {
               </Grid.Row>
             </Grid>
             <Hr />
-
+            {
+              console.log(
+                api.state.ticketList.filter(ticket => ticket.pai_status !== 'Closed' && ticket.filho_status !== 'Closed')
+              )
+            }
             <StatisticItems
               data={{
-                originalActivities: [],
+                originalActivities: api.state.ticketList,
                 totalSubjectClosed: 31,
-                totalSubjectOpen: 12,
-                totalSubjectWaitingUser: 78,
+                totalSubjectOpen: api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
+                totalSubjectWaitingUser: api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
                 totalL2Open: 2,
                 totalL3LegacyOpen: 5,
                 totalL3CloudOpen: 7
