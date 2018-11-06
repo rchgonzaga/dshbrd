@@ -1,11 +1,31 @@
 import React from "react"
 import { ResponsiveBar } from "@nivo/bar"
+import _ from "lodash"
 
 export class HorizontalGroupedBars extends React.Component {
   constructor(props) {
     super(props)
+    
+    let arr = []
+    if(Object.keys(_.groupBy(this.props.data, x => x.pai_biggroup)).length) {
+
+      Object.entries(_.groupBy(this.props.data, x => x.pai_biggroup))
+        .map(([key, value]) => ({key,value}))
+        .forEach(element => {
+          arr.push({
+          country: element.key,
+          closed: Math.floor(Math.random() * 100) + 1,
+          open: Math.floor(Math.random() * 100) + 1,
+          waitinguser: Math.floor(Math.random() * 100) + 1
+        })
+      })
+
+      console.log(arr)
+
+    }
+
     this.state = {
-      innerData: this.props.data,
+      innerData: Object.values(arr ? arr : []),
       innerWidth: this.props.width,
       innerHeight: this.props.height
     }

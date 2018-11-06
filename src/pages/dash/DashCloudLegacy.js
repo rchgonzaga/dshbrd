@@ -1,5 +1,6 @@
 import React from "react"
 import { Grid, Button } from "semantic-ui-react"
+import _ from "lodash"
 
 // Import our Api Service Subscriber
 import Api, { ApiSubscribe } from "../../state/Api"
@@ -54,7 +55,7 @@ class HomeChild extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <HorizontalGroupedBars
-                    data={api.state.pieData}
+                    data={api.state.ticketList}
                     width={window.innerWidth / 3}
                     height={window.innerHeight / 2}
                   />
@@ -65,7 +66,6 @@ class HomeChild extends React.Component {
               </Grid.Row>
             </Grid>
             <Hr />
-                            
             <StatisticItems
               data={{
                 originalActivities: api.state.ticketList,

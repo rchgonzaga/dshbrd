@@ -151,6 +151,17 @@ export class HomeContainer extends Container {
             // Treat the data to keep the root ticket opened if the child ticket is opened 
             if (data !== undefined) {
                 data.map((item, index) => {
+
+                    // Create a big group
+                    if(item && item.pai_product_model_version){
+                        if(item.pai_product_model_version.split('/').length >= 1) {
+                            item.pai_biggroup = item.pai_product_model_version.split('/')[0]
+                        } else {
+                            console.log('Creating a big group: false')
+                            item.pai_biggroup = 'N/A'
+                        }
+                    }
+
                     if (item.relations.length) {
 
                         item.relations.map((citem, cindex) => {
