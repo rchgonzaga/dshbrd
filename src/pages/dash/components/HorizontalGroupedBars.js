@@ -6,22 +6,31 @@ export class HorizontalGroupedBars extends React.Component {
   constructor(props) {
     super(props)
     
+    // It shouldn't be here
+    // TODO: fix it
     let arr = []
     if(Object.keys(_.groupBy(this.props.data, x => x.pai_biggroup)).length) {
 
       Object.entries(_.groupBy(this.props.data, x => x.pai_biggroup))
         .map(([key, value]) => ({key,value}))
         .forEach(element => {
-          arr.push({
-          country: element.key,
-          closed: Math.floor(Math.random() * 100) + 1,
-          open: Math.floor(Math.random() * 100) + 1,
-          waitinguser: Math.floor(Math.random() * 100) + 1
-        })
+
+          let status = _.groupBy(element.value, y => y.pai_status)
+
+          let newItem = {
+            subject:      element.key,
+            closed:       status['Closed'] ? status['Closed'].length : 0,
+            waitinguser:  status['Wating user'] ? status['Wating user'].length : 0,
+            open:         status['Open'] ? status['Open'].length : 0,
+            caraio: 0
+          }
+
+          if((newItem.closed + newItem.waitinguser + newItem.open) >4 && newItem.subject !== 'undefined') {
+            arr.push( newItem )
+          }
+
+          
       })
-
-      console.log(arr)
-
     }
 
     this.state = {
@@ -50,35 +59,13 @@ export class HorizontalGroupedBars extends React.Component {
       >
         <ResponsiveBar
           data={this.state.innerData}
-          keys={[ "closed", "open", "waitinguser"]}
-          indexBy="country"
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-          padding={0.3}
+          keys={[  "waitinguser", "closed", "open", "caraio" ]}
+          indexBy="subject"
+          margin={{ top: 5, right: 180, bottom: 100, left: 200 }}
           layout="horizontal"
-          colors="set3"
-          colorBy="id"
-          axisBottom={{
-            orient: "bottom",
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "country",
-            legendOffset: 36
-          }}
-          axisLeft={{
-            orient: "left",
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: "food",
-            legendOffset: -40
-          }}
+          colors="set2"
           labelSkipWidth={12}
           labelSkipHeight={12}
-          labelTextColor="inherit:darker(1.6)"
-          animate={true}
-          motionStiffness={90}
-          motionDamping={15}
           legends={[
             {
               dataFrom: "keys",
