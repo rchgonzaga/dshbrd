@@ -14,17 +14,16 @@ import HomeApi from "../../state/HomeState"
 import UserFaces from "../dash/components/UserFaces"
 
 class HomeChild extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      showPopup: false,
-      selectedTicket: {}
-    }
-  }
-
+  
   componentDidMount() {
     this.props.api.getCurrentSession()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+    if (prevProps.data !== this.state) {
+      console.log(prevProps, prevState)
+    }
   }
 
   render() {
@@ -175,7 +174,7 @@ class HomeChild extends React.Component {
             <Hr />
             <MainGrid 
               data={api.state.ticketList}
-              onDoubleClickRow={ticket => this.setState({ showPopup: true, selectedTicket: ticket }) }
+              onDoubleClickRow={ticket => api.selectTicketAndModal({ showPopup: true, selectedTicket: ticket }) }
             />
             <br />
           </div>

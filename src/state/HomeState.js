@@ -20,7 +20,9 @@ export class HomeContainer extends Container {
             isLoadingSession: false,
             ticketList: [],
             subjectNumer: 0,
-            count: 10
+            count: 10,
+            showPopup: false,
+            selectedTicket: {}
         }
     }
 
@@ -32,6 +34,12 @@ export class HomeContainer extends Container {
         this.extractSLAS()
     }
 
+    /**
+     * Info: Extract all and structure the tickets tha are on the grid, in a way that the user can work with the data in diffente ways, using excel.
+     * Required data: this.state.ticketList
+     * Optional data: none
+     * @TODO: Refector this function
+     */
     extractSLAS() {
         let count = 0
 
@@ -79,8 +87,13 @@ export class HomeContainer extends Container {
         console.log(line.replace(/null/g, '').replace(/N\/A/g, ''))
 
     }
-    
 
+    /**
+     * Info: Call the api responsible for populating all the current dashboard
+     * Required data: none
+     * Optional data: none
+     * @TODO: Extract the part where it changes the data to keep the main ticket (father) opened if it has any child opened
+     */
     getCurrentSession() {
         // console.log('getCurrentSession')
         this.setState({
@@ -141,6 +154,16 @@ export class HomeContainer extends Container {
 
     async handleSideMenu() {
         this.setState({ sideMenuVisible: !this.state.sideMenuVisible })
+    }
+
+    /**
+     * Info: Select a ticket and set the modal to true or false, cleaning the selected item
+     * Required data: state
+     * Optional data: none
+     */
+    selectTicketAndModal(state){
+        console.log(state)
+        this.setState(state)
     }
 
 }
