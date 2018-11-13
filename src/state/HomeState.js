@@ -22,7 +22,7 @@ export class HomeContainer extends Container {
             subjectNumer: 0,
             count: 10,
             showPopup: false,
-            selectedTicket: {}
+            selectedTicket: null
         }
     }
 
