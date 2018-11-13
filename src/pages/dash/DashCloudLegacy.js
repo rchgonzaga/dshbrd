@@ -14,6 +14,15 @@ import HomeApi from "../../state/HomeState"
 import UserFaces from "../dash/components/UserFaces"
 
 class HomeChild extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      showPopup: false,
+      selectedTicket: {}
+    }
+  }
+
   componentDidMount() {
     this.props.api.getCurrentSession()
   }
@@ -164,7 +173,10 @@ class HomeChild extends React.Component {
             />
 
             <Hr />
-            <MainGrid data={api.state.ticketList} />
+            <MainGrid 
+              data={api.state.ticketList}
+              onDoubleClickRow={ticket => this.setState({ showPopup: true, selectedTicket: ticket }) }
+            />
             <br />
           </div>
         ) : (

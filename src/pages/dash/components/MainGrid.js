@@ -4,6 +4,7 @@ import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import moment from "moment";
 import _ from "lodash";
+import { mainChildCols } from "./cols"
 
 const MainGrid = props => {
     const cols = [
@@ -231,15 +232,15 @@ const MainGrid = props => {
             filterable
             multiSort={true} // shift to multi sort
             sorted={[{
-                    id: 'pai_status',
-                    desc: true
-                }, {
-                    id: 'pai_priority',
-                    desc: false
-                }, {
-                    id: 'pai_submit_dates',
-                    desc: false
-                }
+                id: 'pai_status',
+                desc: true
+            }, {
+                id: 'pai_priority',
+                desc: false
+            }, {
+                id: 'pai_submit_dates',
+                desc: false
+            }
             ]}
             defaultFilterMethod={(filter, row) =>
                 String(row[filter.id]) === filter.value
@@ -251,6 +252,20 @@ const MainGrid = props => {
                 zoom: "0.68"
             }}
             className="-striped -highlight"
+            SubComponent={row => {
+                if (_.values(row.original.relations).length > 0) {
+                    return (
+                        <div style={{ padding: "20px" }}>
+                            <ReactTable
+                                data={_.values(row.original.relations)}
+                                columns={mainChildCols}
+                                defaultPageSize={_.values(row.original.relations).length}
+                                showPagination={false}
+                            />
+                        </div>
+                    )
+                }
+            }}
             getTrProps={(state, rowInfo, column) => {
                 let clr = "";
 
@@ -268,7 +283,8 @@ const MainGrid = props => {
                         background: clr
                     },
                     onDoubleClick: (e, handleOriginal) => {
-                        console.log("It was in this row:", rowInfo.original);
+                        props.onDoubleClickRow(rowInfo.original)
+
                         if (handleOriginal) {
                             handleOriginal();
                         }
