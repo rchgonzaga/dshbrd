@@ -7,7 +7,28 @@ export class PieChart extends React.Component {
         this.state = {
             innerData: this.props.data,
             innerWidth: this.props.width,
-            innerHeight: this.props.height
+            innerHeight: this.props.height,
+            totalSubjects: 200,
+            topics: [
+                {
+                    id: "Closed",
+                    label: "Closed",
+                    value: (this.props.data.filter(ticket => ticket.pai_status === 'Closed').length / this.props.data.length * 100).toFixed(1),
+                    color: "hsl(240, 70%, 50%)"
+                },
+                {
+                    id: "Opened",
+                    label: "Opened",
+                    value: (this.props.data.filter(ticket => ticket.pai_status === 'Open').length / this.props.data.length * 100).toFixed(1),
+                    color: "hsl(145, 70%, 50%)"
+                },
+                {
+                    id: "Waiting",
+                    label: "Waiting",
+                    value: (this.props.data.filter(ticket => ticket.pai_status === 'Wating user').length / this.props.data.length * 100).toFixed(1),
+                    color: "hsl(225, 70%, 50%)"
+                }
+            ]
         };
     }
 
@@ -22,7 +43,7 @@ export class PieChart extends React.Component {
         return (
             <div style={{ width: this.state.innerWidth, height: this.state.innerHeight }}>
                 <ResponsivePie
-                    data={this.state.innerData}
+                    data={this.state.topics}
                     margin={{
                         top: 40,
                         right: 80,
@@ -94,19 +115,19 @@ export class PieChart extends React.Component {
                         },
                         {
                             match: {
-                                id: "scala"
+                                id: "Opened"
                             },
                             id: "lines"
                         },
                         {
                             match: {
-                                id: "lisp"
+                                id: "Waiting"
                             },
                             id: "lines"
                         },
                         {
                             match: {
-                                id: "elixir"
+                                id: "Subjects"
                             },
                             id: "lines"
                         },

@@ -45,17 +45,16 @@ class HomeChild extends React.Component {
             </h2>
             <Hr />
             <Statistic.Group widths='five'>
-              <Statistic style={{backgroundColor:  '#e3e3e3', borderRadius: '10px', margin: '0px 0px 22px 7%', padding: '10px'}}>
-                <Statistic.Value>22</Statistic.Value>
-                <Statistic.Label>Saves</Statistic.Label>
+              <Statistic style={{backgroundColor:  '#e3e3e3', borderRadius: '10px', margin: '0px 9px 22px 7%', padding: '10px'}}>
+                <Statistic.Value>2 DAYS</Statistic.Value>
+                <Statistic.Label>L2 / avg time</Statistic.Label>
               </Statistic>
           
               <Statistic style={{backgroundColor:  '#e3e3e3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px'}}>
-                <Statistic.Value text>
-                  Three
-                  <br />Thousand
+                <Statistic.Value>
+                  4 DAYS
                 </Statistic.Value>
-                <Statistic.Label>Signups</Statistic.Label>
+                <Statistic.Label>L3 / avg time</Statistic.Label>
               </Statistic>
           
               <Statistic style={{backgroundColor:  '#e3e3e3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px'}}>
@@ -63,7 +62,7 @@ class HomeChild extends React.Component {
                   <Icon name='plane' />
                   5
                 </Statistic.Value>
-                <Statistic.Label>Flights</Statistic.Label>
+                <Statistic.Label>Tickets today</Statistic.Label>
               </Statistic>
           
               <Statistic style={{backgroundColor:  '#e3e3e3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px'}}>
@@ -81,7 +80,7 @@ class HomeChild extends React.Component {
               <Grid.Row>
                 <Grid.Column>
                   <PieChart
-                    data={api.state.barData}
+                    data={api.state.ticketList}
                     width={window.innerWidth / 2.5}
                     height={window.innerHeight / 2.5}
                   />
@@ -109,12 +108,12 @@ class HomeChild extends React.Component {
                   ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L2' && ticket.pai_status === 'Open'
                 ).length,
                 totalL3LegacyOpen: api.state.ticketList.filter(
-                  ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' && 
+                    ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' && 
                     ticket.pai_status === 'Open' &&
                     ticket.pai_product.search('Legacy Value Capture Retailer') === 0
                 ).length,
                 totalL3CloudOpen:  api.state.ticketList.filter(
-                  ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' && 
+                    ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' && 
                     ticket.pai_status === 'Open' &&
                     ticket.pai_product.search('Value Capture') === 0
                 ).length
