@@ -15,7 +15,7 @@ export class ApiContainer extends Container {
     // The state will be available to any component we inject
     // the Container instance into
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
       sideMenuVisible: false,
       isLoadingSession: false,
       count: 0

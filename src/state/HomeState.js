@@ -29,40 +29,6 @@ export class HomeContainer extends Container {
     }
 
     changeAiMothaFocka() {
-        this.setState({
-            barData: [
-                {
-                    id: "elixir",
-                    label: "elixir",
-                    value: Math.floor(Math.random() * 100) + 1,
-                    color: "hsl(173, 70%, 50%)"
-                },
-                {
-                    id: "erlang",
-                    label: "erlang",
-                    value: Math.floor(Math.random() * 100) + 1,
-                    color: "hsl(240, 70%, 50%)"
-                },
-                {
-                    id: "scala",
-                    label: "scala",
-                    value: Math.floor(Math.random() * 100) + 1,
-                    color: "hsl(145, 70%, 50%)"
-                },
-                {
-                    id: "lisp",
-                    label: "lisp",
-                    value: Math.floor(Math.random() * 100) + 1,
-                    color: "hsl(225, 70%, 50%)"
-                },
-                {
-                    id: "rust",
-                    label: "rust",
-                    value: Math.floor(Math.random() * 100) + 1,
-                    color: "hsl(230, 70%, 50%)"
-                }
-            ]
-        })
     }
 
     getCurrentSession() {

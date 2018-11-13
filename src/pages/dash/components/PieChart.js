@@ -7,28 +7,7 @@ export class PieChart extends React.Component {
         this.state = {
             innerData: this.props.data,
             innerWidth: this.props.width,
-            innerHeight: this.props.height,
-            totalSubjects: 200,
-            topics: [
-                {
-                    id: "Closed",
-                    label: "Closed",
-                    value: (this.props.data.filter(ticket => ticket.pai_status === 'Closed').length / this.props.data.length * 100).toFixed(1),
-                    color: "hsl(240, 70%, 50%)"
-                },
-                {
-                    id: "Opened",
-                    label: "Opened",
-                    value: (this.props.data.filter(ticket => ticket.pai_status === 'Open').length / this.props.data.length * 100).toFixed(1),
-                    color: "hsl(145, 70%, 50%)"
-                },
-                {
-                    id: "Waiting",
-                    label: "Waiting",
-                    value: (this.props.data.filter(ticket => ticket.pai_status === 'Wating user').length / this.props.data.length * 100).toFixed(1),
-                    color: "hsl(225, 70%, 50%)"
-                }
-            ]
+            innerHeight: this.props.height
         };
     }
 
@@ -43,7 +22,7 @@ export class PieChart extends React.Component {
         return (
             <div style={{ width: this.state.innerWidth, height: this.state.innerHeight }}>
                 <ResponsivePie
-                    data={this.state.topics}
+                    data={this.state.innerData}
                     margin={{
                         top: 40,
                         right: 80,
@@ -68,76 +47,6 @@ export class PieChart extends React.Component {
                     padding={0.06}
                     motionStiffness={90}
                     motionDamping={15}
-                    defs={[
-                        {
-                            id: "dots",
-                            type: "patternDots",
-                            background: "inherit",
-                            color: "rgba(255, 255, 255, 0.3)",
-                            size: 4,
-                            padding: 1,
-                            stagger: true
-                        },
-                        {
-                            id: "lines",
-                            type: "patternLines",
-                            background: "inherit",
-                            color: "rgba(255, 255, 255, 0.3)",
-                            rotation: -45,
-                            lineWidth: 6,
-                            spacing: 10
-                        }
-                    ]}
-                    fill={[
-                        {
-                            match: {
-                                id: "ruby"
-                            },
-                            id: "dots"
-                        },
-                        {
-                            match: {
-                                id: "c"
-                            },
-                            id: "dots"
-                        },
-                        {
-                            match: {
-                                id: "go"
-                            },
-                            id: "dots"
-                        },
-                        {
-                            match: {
-                                id: "python"
-                            },
-                            id: "dots"
-                        },
-                        {
-                            match: {
-                                id: "Opened"
-                            },
-                            id: "lines"
-                        },
-                        {
-                            match: {
-                                id: "Waiting"
-                            },
-                            id: "lines"
-                        },
-                        {
-                            match: {
-                                id: "Subjects"
-                            },
-                            id: "lines"
-                        },
-                        {
-                            match: {
-                                id: "javascript"
-                            },
-                            id: "lines"
-                        }
-                    ]}
                     legends={[
                         {
                             anchor: "bottom",
