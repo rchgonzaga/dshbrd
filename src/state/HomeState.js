@@ -26,10 +26,16 @@ export class HomeContainer extends Container {
         }
     }
 
+    /**
+     * TODO: Remove it
+     */
     increment() {
         this.setState({ count: this.state.count + 10 })
     }
 
+    /**
+     * TODO: Remove it
+     */
     changeAiMothaFocka() {
         this.extractSLAS()
     }
@@ -38,7 +44,7 @@ export class HomeContainer extends Container {
      * Info: Extract all and structure the tickets tha are on the grid, in a way that the user can work with the data in diffente ways, using excel.
      * Required data: this.state.ticketList
      * Optional data: none
-     * @TODO: Refector this function
+     * @TODO: Refector this function and make the dashbard download the CSV file
      */
     extractSLAS() {
         let count = 0
@@ -148,10 +154,16 @@ export class HomeContainer extends Container {
         })
     }
 
+    /**
+     * TODO: Remove it
+     */
     decrement() {
         this.setState({ count: this.state.count - 1 })
     }
-
+    
+    /**
+     * TODO: Refector it to the menu component.
+     */
     async handleSideMenu() {
         this.setState({ sideMenuVisible: !this.state.sideMenuVisible })
     }
@@ -169,6 +181,5 @@ export class HomeContainer extends Container {
 }
 
 const HomeApi = new HomeContainer()
-
 
 export default HomeApi
