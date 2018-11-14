@@ -104,21 +104,15 @@ class HomeChild extends React.Component {
                   <PieChart
                     data={[
                       {
-                        id: "Closed",
-                        label: "Closed",
-                        value: (api.state.ticketList.filter(ticket => ticket.pai_status === 'Closed').length / api.state.ticketList.length * 100).toFixed(1),
-                        color: "hsl(240, 70%, 50%)"
-                      },
-                      {
                         id: "Opened",
                         label: "Opened",
-                        value: (api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length / api.state.ticketList.length * 100).toFixed(1),
+                        value: api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
                         color: "hsl(145, 70%, 50%)"
                       },
                       {
                         id: "Waiting",
                         label: "Waiting",
-                        value: (api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length / api.state.ticketList.length * 100).toFixed(1),
+                        value: api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
                         color: "hsl(225, 70%, 50%)"
                       }
                     ]}
@@ -134,30 +128,13 @@ class HomeChild extends React.Component {
                   />
                 </Grid.Column>
                 <Grid.Column>
-                  <UserFaces />
-                  <PieChart
-                    data={[
-                      {
-                        id: "Closed",
-                        label: "Closed",
-                        value: (api.state.ticketList.filter(ticket => ticket.pai_status === 'Closed').length / api.state.ticketList.length * 100).toFixed(1),
-                        color: "hsl(240, 70%, 50%)"
-                      },
-                      {
-                        id: "Opened",
-                        label: "Opened",
-                        value: (api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length / api.state.ticketList.length * 100).toFixed(1),
-                        color: "hsl(145, 70%, 50%)"
-                      },
-                      {
-                        id: "Waiting",
-                        label: "Waiting",
-                        value: (api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length / api.state.ticketList.length * 100).toFixed(1),
-                        color: "hsl(225, 70%, 50%)"
-                      }
-                    ]}
-                    width={window.innerWidth / 3}
-                    height={window.innerHeight / 3.2}
+                  <UserFaces 
+                    data={{
+                      total: api.state.ticketList.length,
+                      totalOneDay: (api.state.ticketList.filter(ticket => parseFloat(ticket.pai_age) <= 1).length),
+                      totalThreeDay: (api.state.ticketList.filter(ticket => parseFloat(ticket.pai_age) > 1 && parseFloat(ticket.pai_age) <= 3).length),
+                      totalRestDay: (api.state.ticketList.filter(ticket => parseFloat(ticket.pai_age) >= 4).length)
+                    }}
                   />
                 </Grid.Column>
               </Grid.Row>

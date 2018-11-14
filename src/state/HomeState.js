@@ -100,7 +100,7 @@ export class HomeContainer extends Container {
             isLoadingSession: true
         })
         Sessions.getSession().then(data => {
-
+            
             // Treat the data to keep the root ticket opened if the child ticket is opened 
             if (data !== undefined) {
                 data.map((item, index) => {

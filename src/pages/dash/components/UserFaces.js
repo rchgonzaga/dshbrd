@@ -1,6 +1,7 @@
 import React, { useReducer } from "react"
 import { Icon, Grid } from "semantic-ui-react"
 
+
 const todosReducer = (todos, action) => {
   switch (action.type) {
     case "ADD_TODO":
@@ -29,9 +30,9 @@ const todosReducer = (todos, action) => {
   }
 }
 
-export default () => {
+export default (props) => {
   const [todos, dispatch] = useReducer(todosReducer, [])
-
+  const {total, totalOneDay, totalRestDay, totalThreeDay} = props.data
   return (
     <div>
       <br />
@@ -46,7 +47,7 @@ export default () => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            65% tickets answered in less than 1 day
+            {(totalOneDay / total * 100).toFixed(1)}% tickets answered in less than 1 day
           </Grid.Column>
           <Grid.Column>
             <Icon
@@ -56,7 +57,7 @@ export default () => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            25% tickets answered in more than 3 day
+            {(totalThreeDay / total * 100).toFixed(1)}% tickets answered in more than 3 day
           </Grid.Column>
           <Grid.Column>
             <Icon
@@ -66,7 +67,9 @@ export default () => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            10% tickets answered in more than 7 day
+            {
+              ((totalRestDay + (total - (totalRestDay+totalOneDay+totalThreeDay))) / total * 100).toFixed(1)
+            }% tickets answered in more than 7 day
           </Grid.Column>
         </Grid.Row>
       </Grid>
