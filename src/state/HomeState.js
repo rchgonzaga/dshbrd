@@ -94,12 +94,12 @@ export class HomeContainer extends Container {
      * Optional data: none
      * @TODO: Extract the part where it changes the data to keep the main ticket (father) opened if it has any child opened
      */
-    getCurrentSession() {
+    getCurrentSession(port) {
         // console.log('getCurrentSession')
         this.setState({
             isLoadingSession: true
         })
-        Sessions.getSession().then(data => {
+        Sessions.getSession(port).then(data => {
             
             // Treat the data to keep the root ticket opened if the child ticket is opened 
             if (data !== undefined) {

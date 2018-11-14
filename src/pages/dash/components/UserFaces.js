@@ -47,7 +47,7 @@ export default (props) => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            {(totalOneDay / total * 100).toFixed(1)}% tickets answered in less than 1 day
+            {(totalOneDay / total * 100).toFixed(1)}% of the issues resolved within 1 day
           </Grid.Column>
           <Grid.Column>
             <Icon
@@ -57,7 +57,7 @@ export default (props) => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            {(totalThreeDay / total * 100).toFixed(1)}% tickets answered in more than 3 day
+            {(totalThreeDay / total * 100).toFixed(1)}% of the issues resolved between 1 and 3 days
           </Grid.Column>
           <Grid.Column>
             <Icon
@@ -69,7 +69,7 @@ export default (props) => {
             <br />
             {
               ((totalRestDay + (total - (totalRestDay+totalOneDay+totalThreeDay))) / total * 100).toFixed(1)
-            }% tickets answered in more than 7 day
+            }% of the issues resolved within 7 or more days
           </Grid.Column>
         </Grid.Row>
       </Grid>

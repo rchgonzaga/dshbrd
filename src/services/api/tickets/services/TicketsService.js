@@ -5,8 +5,8 @@ export default class TicketsService {
    * Get Current session
    * @returns {Promise}
    */
-  async getSession() {
-    let data = await fetchWithTimeout("http://10.184.248.106:8080/relations")
+  async getSession(port) {
+    let data = await fetchWithTimeout(`http://10.184.248.106:${port}/relations`)
       .then(res => {
         return res.json();
       })

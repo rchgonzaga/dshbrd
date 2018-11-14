@@ -21,7 +21,7 @@ class HomeChild extends React.Component {
     this.handleModal = this.handleModal.bind(this)
   }
   componentDidMount() {
-    this.props.api.getCurrentSession()
+    this.props.api.getCurrentSession(8088)
   }
 
   // componentDidUpdate(prevProps, prevState) {

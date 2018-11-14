@@ -222,10 +222,10 @@ class RoutesChild extends React.Component {
 }
 
 export default function Routes() {
-  const [name, setName] = useState("StateName")
+  const [name, setName] = useState("Dashboards - You can't measure it, you can't improve it.")
 
   useEffect(() => {
-    document.title = name + " - "
+    document.title = name
   })
 
   return (
