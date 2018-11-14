@@ -1,6 +1,7 @@
 import { Container } from "unstated"
 import Sessions from '../services/api/tickets/index'
 import _ from 'lodash'
+import { CSVDownload  } from "react-csv";
 
 import UNSTATED from "unstated-debug"
 UNSTATED.logStateChanges = false
@@ -34,13 +35,6 @@ export class HomeContainer extends Container {
     }
 
     /**
-     * TODO: Remove it
-     */
-    changeAiMothaFocka() {
-        this.extractSLAS()
-    }
-
-    /**
      * Info: Extract all and structure the tickets tha are on the grid, in a way that the user can work with the data in diffente ways, using excel.
      * Required data: this.state.ticketList
      * Optional data: none
@@ -52,7 +46,7 @@ export class HomeContainer extends Container {
         let data = this.state.ticketList
 
         let obj = data
-        let line = '\ufeffSUBJECT;L2 START - INC/WO;CREATED_AT;L2 - WO;CREATED_AT;CLOSED_AT;L3 START - JIRA; CREATED_AT; ASSINED_AD; CLOSED_AT;\n'
+        let line = 'SUBJECT;L2 START - INC/WO;CREATED_AT;L2 - WO;CREATED_AT;CLOSED_AT;L3 START - JIRA; CREATED_AT; ASSINED_AD; CLOSED_AT;\n'
         obj.map((item, index) => {
 
             count++
@@ -89,8 +83,8 @@ export class HomeContainer extends Container {
 
 
         })
-        console.log(count)
-        console.log(line.replace(/null/g, '').replace(/N\/A/g, ''))
+        // console.log(count)
+        return line.replace(/null/g, '').replace(/N\/A/g, '')
 
     }
 

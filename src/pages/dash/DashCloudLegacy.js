@@ -1,6 +1,5 @@
 import React from "react"
-import { Grid, Button, Statistic, Icon, Image } from "semantic-ui-react"
-import _ from "lodash"
+import { Grid, Button, Statistic} from "semantic-ui-react"
 
 // Import our Api Service Subscriber
 import Api, { ApiSubscribe } from "../../state/Api"
@@ -13,6 +12,8 @@ import MainGrid from "../dash/components/MainGrid"
 import HomeApi from "../../state/HomeState"
 import UserFaces from "../dash/components/UserFaces"
 import ModalScrollingExample from "./components/ModalScrollingExample"
+import { CSVDownload, CSVLink  } from "react-csv";
+import {string2csv} from "react-csv"
 
 class HomeChild extends React.Component {
 
@@ -44,9 +45,11 @@ class HomeChild extends React.Component {
               <span style={{ color: "grey" }}>
                 {" "}
                 {new Date().toLocaleDateString("pt-BR")} &nbsp;&nbsp;
-                <Button primary onClick={() => api.changeAiMothaFocka()}>
-                  Update
-                </Button>
+                
+                <CSVLink className="ui primary button" data={api.extractSLAS()} filename={"SLA.csv"}>
+                  SLA
+                </CSVLink>
+
                 <Button secondary onClick={() => api.getCurrentSession()}>
                   Update Grid
                 </Button>
@@ -54,33 +57,32 @@ class HomeChild extends React.Component {
             </h2>
             <Hr />
             <Statistic.Group widths='five'>
-              <Statistic style={{ backgroundColor: '#e3e3e3', borderRadius: '10px', margin: '0px 9px 22px 7%', padding: '10px' }}>
+              <Statistic style={{ backgroundColor: '#c3dfef', borderRadius: '10px', margin: '0px 9px 22px 7%', padding: '10px' }}>
                 <Statistic.Value>2 DAYS</Statistic.Value>
                 <Statistic.Label>L2 / avg time</Statistic.Label>
               </Statistic>
 
-              <Statistic style={{ backgroundColor: '#e3e3e3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px' }}>
+              <Statistic style={{ backgroundColor: '#c3efca', borderRadius: '10px', margin: '0px 10px auto', padding: '10px' }}>
                 <Statistic.Value>
                   4 DAYS
                 </Statistic.Value>
                 <Statistic.Label>L3 / avg time</Statistic.Label>
               </Statistic>
 
-              <Statistic style={{ backgroundColor: '#e3e3e3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px' }}>
+              <Statistic style={{ backgroundColor: '#eeefc3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px' }}>
                 <Statistic.Value>
-                  <Icon name='plane' />
-                  5
+                  4 DAYS
                 </Statistic.Value>
-                <Statistic.Label>Tickets today</Statistic.Label>
+                <Statistic.Label>VC Legacy / avg time</Statistic.Label>
               </Statistic>
 
-              <Statistic style={{ backgroundColor: '#e3e3e3', borderRadius: '10px', margin: '0px 10px auto', padding: '10px' }}>
+              <Statistic style={{ backgroundColor: '#efc3ec', borderRadius: '10px', margin: '0px 10px auto', padding: '10px' }}>
                 <Statistic.Value>
-                  <Image src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' className='circular inline' />
-                  42
+                  4 DAYS
                 </Statistic.Value>
-                <Statistic.Label>Team Members</Statistic.Label>
+                <Statistic.Label>VCT / avg time</Statistic.Label>
               </Statistic>
+
             </Statistic.Group>
 
             <Hr />
