@@ -7,13 +7,14 @@ import {
 } from "semantic-ui-react";
 import ReactTable from "react-table";
 import { mainChildCols } from "./cols"
+import Hr from "../../../components/Hr"
 
 const ModalScrollingExample = props => {
 
     console.log(props)
 
     return (
-        <Modal open={props.show} centered={false} size={'fullscreen'}>
+        <Modal open={props.show} centered={false} size={'large'}>
             <Modal.Header>
                 <Header>
                     {props.data.pai_summary}
@@ -32,7 +33,7 @@ const ModalScrollingExample = props => {
                         </Header.Subheader>
                     </Header>
 
-                    <hr />
+                    <Hr />
                     <Grid divided='vertically'>
                         <Grid.Row columns={2}>
                             <Grid.Column width={12}>
@@ -54,55 +55,10 @@ const ModalScrollingExample = props => {
 
                                     <Form.Group widths='equal'>
                                         <Form.Select fluid label='Subject' options={[
-                                            { key: 'm', text: 'Male', value: 'male' },
-                                            { key: 'f', text: 'Female', value: 'female' },
+                                            { key: 'm', text: 'none', value: 'none' }
                                         ]} placeholder='Subject'
                                             name='subject'
                                             value={props.subject}
-                                        />
-                                    </Form.Group>
-
-                                    <Form.Group inline>
-                                        <label>Priority</label>
-                                        <Form.Radio
-                                            label='High'
-                                            value='hg'
-                                            checked={false}
-
-                                        />
-                                        <Form.Radio
-                                            label='Medium'
-                                            value='md'
-                                            checked={false}
-
-                                        />
-                                        <Form.Radio
-                                            label='Low'
-                                            value='lg'
-                                            checked={false}
-
-                                        />
-                                    </Form.Group>
-
-                                    <Form.Group inline>
-                                        <label>P.Status</label>
-                                        <Form.Radio
-                                            label='Aware'
-                                            value='yes'
-                                            checked={false}
-
-                                        />
-                                        <Form.Radio
-                                            label='Not aware'
-                                            value='no'
-                                            checked={false}
-
-                                        />
-                                        <Form.Radio
-                                            label='Following'
-                                            value='flw'
-                                            checked={false}
-
                                         />
                                     </Form.Group>
 
@@ -122,7 +78,7 @@ const ModalScrollingExample = props => {
                 </Modal.Description>
             </Modal.Content>
             <Modal.Actions>
-                <Button primary onClick={() => { this.setState({ showPopup: false, data: {} }) }}>
+                <Button primary onClick={() => { props.onClose() }}>
                     Close <Icon name='right chevron' />
                 </Button>
             </Modal.Actions>

@@ -21,8 +21,7 @@ export class HorizontalGroupedBars extends React.Component {
             subject:      element.key,
             closed:       status['Closed'] ? status['Closed'].length : 0,
             waitinguser:  status['Wating user'] ? status['Wating user'].length : 0,
-            open:         status['Open'] ? status['Open'].length : 0,
-            caraio: 0
+            open:         status['Open'] ? status['Open'].length : 0
           }
 
           if((newItem.closed + newItem.waitinguser + newItem.open) >4 && newItem.subject !== 'undefined') {
@@ -40,18 +39,6 @@ export class HorizontalGroupedBars extends React.Component {
     }
   }
 
-  /**
-   * TODO: Need to be checked if this method is the optimal one to use in the case
-   **/
-  componentDidUpdate(prevProps) {
-    // // Typical usage (don't forget to compare props):
-    if (this.state.innerData !== prevProps.data) {
-      this.setState({
-        innerData: prevProps.data
-      })
-    }
-  }
-
   render() {
     return (
       <div
@@ -59,7 +46,7 @@ export class HorizontalGroupedBars extends React.Component {
       >
         <ResponsiveBar
           data={this.state.innerData}
-          keys={[  "waitinguser", "closed", "open", "caraio" ]}
+          keys={[  "waitinguser", "closed", "open"]}
           indexBy="subject"
           margin={{ top: 5, right: 180, bottom: 100, left: 200 }}
           layout="horizontal"

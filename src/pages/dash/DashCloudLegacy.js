@@ -12,11 +12,14 @@ import MainGrid from "../dash/components/MainGrid"
 import HomeApi from "../../state/HomeState"
 import UserFaces from "../dash/components/UserFaces"
 import ModalScrollingExample from "./components/ModalScrollingExample"
-import { CSVDownload, CSVLink  } from "react-csv";
-import {string2csv} from "react-csv"
+import { CSVLink  } from "react-csv";
 
 class HomeChild extends React.Component {
 
+  constructor(props){
+    super(props)
+    this.handleModal = this.handleModal.bind(this)
+  }
   componentDidMount() {
     this.props.api.getCurrentSession()
   }
@@ -27,6 +30,10 @@ class HomeChild extends React.Component {
   //     console.log(prevProps, prevState)
   //   }
   // }
+
+  handleModal(){
+    this.props.api.handleModal()
+  }
 
   render() {
     let { api, globalApi } = this.props
@@ -47,7 +54,11 @@ class HomeChild extends React.Component {
                 {new Date().toLocaleDateString("pt-BR")} &nbsp;&nbsp;
                 
                 <CSVLink className="ui primary button" data={api.extractSLAS()} filename={"SLA.csv"}>
-                  SLA
+                  SLA - Excel
+                </CSVLink>
+                
+                <CSVLink className="ui primary button" data={api.state.ticketList} filename={"Tickets.csv"} separator={";"}>
+                  Tickets - Excel
                 </CSVLink>
 
                 <Button secondary onClick={() => api.getCurrentSession()}>
@@ -180,8 +191,8 @@ class HomeChild extends React.Component {
               onDoubleClickRow={ticket => api.selectTicketAndModal({ showPopup: true, selectedTicket: ticket })}
             />
             {api.state.showPopup  ?
-              (<ModalScrollingExample show={api.state.showPopup} data={api.state.selectedTicket} />) : (
-                <div>nada</div>
+              (<ModalScrollingExample show={api.state.showPopup} data={api.state.selectedTicket} onClose={this.handleModal}/>) : (
+                <div></div>
               )
             }
             

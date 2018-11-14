@@ -58,7 +58,7 @@ export class HomeContainer extends Container {
                 if (min) {
                     // console.log('INICIO L2: ' + min.filho_ticket_number + ' - submit_date: ', min.filho_submit_date)
                     line += (min.filho_ticket_number ? min.filho_ticket_number : 'N/A') + ';' + (min.filho_submit_date ? min.filho_submit_date : 'N/A') + ';'
-                    
+
                     // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', min.pai_submit_date, ' - pai_date_closed: ', min.pai_closed_date)
                     line += (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (min.pai_submit_date ? min.pai_submit_date : 'N/A') + ';' + (min.pai_closed_date ? min.pai_closed_date : 'N/A') + ';'
                 } else {
@@ -170,6 +170,12 @@ export class HomeContainer extends Container {
     selectTicketAndModal(state){
         console.log(state)
         this.setState(state)
+    }
+
+    handleModal(){
+        this.setState({
+            showPopup: !this.state.showPopup
+        })
     }
 
 }
