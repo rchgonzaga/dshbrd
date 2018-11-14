@@ -7,7 +7,7 @@ import { Subscribe } from "unstated"
 import Api from "./state/Api"
 
 import DashCloudLegacy from "./pages/dash/DashCloudLegacy"
-import Foo from "./pages/dashpodpyar/DashPodPyAr"
+import podpyar from "./pages/dashpodpyar/DashPodPyAr"
 import Bar from "./pages/barter/Bar"
 import Counter from "./components/Counter"
 import LoginLogoutButton from "./components/LoginLogoutButtons"
@@ -91,11 +91,11 @@ class RoutesChild extends React.Component {
             {/* Shows only if logged = true */}
             {globalApi.state.loggedIn ? (
               <Menu.Item
-                active={this.state.activeItem === "foo"}
+                active={this.state.activeItem === "podpyar"}
                 onClick={this.handleItemClick}
                 as={Link}
-                name="foo"
-                to="/foo"
+                name="podpyar"
+                to="/podpyar"
               >
                 POD PY & AR
               </Menu.Item>
@@ -106,11 +106,11 @@ class RoutesChild extends React.Component {
             {/* Shows only if logged = true */}
             {globalApi.state.loggedIn ? (
               <Menu.Item
-                active={this.state.activeItem === "bar"}
+                active={this.state.activeItem === "barter"}
                 onClick={this.handleItemClick}
                 as={Link}
-                name="bar"
-                to="/bar"
+                name="barter"
+                to="/barter"
               >
                 Barter
               </Menu.Item>
@@ -119,7 +119,7 @@ class RoutesChild extends React.Component {
             )}
 
             {/* Shows only if logged = true */}
-            {globalApi.state.loggedIn ? (
+            {/*globalApi.state.loggedIn ? (
               <Dropdown
                 item
                 icon="wrench"
@@ -148,7 +148,7 @@ class RoutesChild extends React.Component {
               </Dropdown>
             ) : (
               ""
-            )}
+            )*/}
 
             <Menu.Menu position="right">
               <div className="ui right aligned category search item">
@@ -208,8 +208,8 @@ class RoutesChild extends React.Component {
                 <div>
                   <div>
                     <Route exact path="/" component={DashCloudLegacy} />
-                    <Route path="/foo" component={Foo} />
-                    <Route path="/bar" component={Bar} />
+                    <Route path="/podpyar" component={podpyar} />
+                    <Route path="/barter" component={Bar} />
                   </div>
                 </div>
               </Container>

@@ -44,7 +44,7 @@ class HomeChild extends React.Component {
         {api.state.isLoadingSession === false ? (
           <div>
             <h2>
-              Dashboard -{" "}
+              ITS Cloud & Legacy -{" "}
               <span style={{ color: "grey" }}>
                 01/06/2018 ~ {new Date().toLocaleDateString("pt-BR")}
               </span>
@@ -67,6 +67,7 @@ class HomeChild extends React.Component {
               </span>
             </h2>
             <Hr />
+            {/*
             <Statistic.Group widths='five'>
               <Statistic style={{ backgroundColor: '#c3dfef', borderRadius: '10px', margin: '0px 9px 22px 7%', padding: '10px' }}>
                 <Statistic.Value>2 DAYS</Statistic.Value>
@@ -95,6 +96,7 @@ class HomeChild extends React.Component {
               </Statistic>
 
             </Statistic.Group>
+            */}
 
             <Hr />
 
