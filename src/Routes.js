@@ -46,6 +46,7 @@ class RoutesChild extends React.Component {
 
   handleItemClick = (e, { name }) => {
     console.log(name)
+    document.title = name + " - If you can't measure it, you can't improve it."
     this.setState({ activeItem: name })
   }
 
@@ -76,10 +77,10 @@ class RoutesChild extends React.Component {
             {/* Shows only if logged = true */}
             {globalApi.state.loggedIn ? (
               <Menu.Item
-                active={this.state.activeItem === "home"}
+                active={this.state.activeItem === "ITS Cloud & Legacy"}
                 onClick={this.handleItemClick}
                 as={Link}
-                name="home"
+                name="ITS Cloud & Legacy"
                 to="/"
               >
                 ITS Cloud & Legacy
@@ -91,10 +92,10 @@ class RoutesChild extends React.Component {
             {/* Shows only if logged = true */}
             {globalApi.state.loggedIn ? (
               <Menu.Item
-                active={this.state.activeItem === "podpyar"}
+                active={this.state.activeItem === "POD PY & AR"}
                 onClick={this.handleItemClick}
                 as={Link}
-                name="podpyar"
+                name="POD PY & AR"
                 to="/podpyar"
               >
                 POD PY & AR
@@ -106,10 +107,10 @@ class RoutesChild extends React.Component {
             {/* Shows only if logged = true */}
             {globalApi.state.loggedIn ? (
               <Menu.Item
-                active={this.state.activeItem === "barter"}
+                active={this.state.activeItem === "Barter"}
                 onClick={this.handleItemClick}
                 as={Link}
-                name="barter"
+                name="Barter"
                 to="/barter"
               >
                 Barter
@@ -222,7 +223,7 @@ class RoutesChild extends React.Component {
 }
 
 export default function Routes() {
-  const [name, setName] = useState("Dashboards - You can't measure it, you can't improve it.")
+  const [name, setName] = useState("Dashboards - If you can't measure it, you can't improve it.")
 
   useEffect(() => {
     document.title = name
