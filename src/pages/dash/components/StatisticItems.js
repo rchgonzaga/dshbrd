@@ -21,7 +21,7 @@ const StatisticItems = (props) => {
                 <Statistic.Label>Open</Statistic.Label>
             </Statistic>
 
-            <Statistic color='grey'>
+            <Statistic color='grey' style={{margin: "0px -30px 0px -30px"}}>
                 <Statistic.Value>|</Statistic.Value>
                 <Statistic.Label>&nbsp;</Statistic.Label>
             </Statistic>

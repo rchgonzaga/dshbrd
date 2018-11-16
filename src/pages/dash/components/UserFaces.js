@@ -34,7 +34,7 @@ export default (props) => {
   const [todos, dispatch] = useReducer(todosReducer, [])
   const {total, totalOneDay, totalRestDay, totalThreeDay} = props.data
   return (
-    <div>
+    <div style={{width: '350px'}}>
       <br />
       <br />
       <Grid textAlign="center" columns={3} divided>
@@ -47,7 +47,7 @@ export default (props) => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            {(totalOneDay / total * 100).toFixed(1)}% of the issues resolved within 1 day
+            {(totalOneDay / total * 100).toFixed(1)}% <br/>issues resolved within 1 day
           </Grid.Column>
           <Grid.Column>
             <Icon
@@ -57,7 +57,7 @@ export default (props) => {
               onClick={() => dispatch({ type: "RESET" })}
             />
             <br />
-            {(totalThreeDay / total * 100).toFixed(1)}% of the issues resolved between 1 and 3 days
+            {(totalThreeDay / total * 100).toFixed(1)}% <br/>issues resolved between 1 and 3 days
           </Grid.Column>
           <Grid.Column>
             <Icon
@@ -69,7 +69,7 @@ export default (props) => {
             <br />
             {
               ((totalRestDay + (total - (totalRestDay+totalOneDay+totalThreeDay))) / total * 100).toFixed(1)
-            }% of the issues resolved within 7 or more days
+            }% <br/>issues resolved within 7 or more days
           </Grid.Column>
         </Grid.Row>
       </Grid>

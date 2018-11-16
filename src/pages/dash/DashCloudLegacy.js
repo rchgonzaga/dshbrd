@@ -61,7 +61,7 @@ class HomeChild extends React.Component {
                   Tickets - Excel
                 </CSVLink>
 
-                <Button secondary onClick={() => api.getCurrentSession()}>
+                <Button secondary onClick={() => api.getCurrentSession(8080)}>
                   Update Grid
                 </Button>
               </span>
@@ -96,9 +96,9 @@ class HomeChild extends React.Component {
               </Statistic>
 
             </Statistic.Group>
+            <Hr />
             */}
 
-            <Hr />
 
             <Grid columns={3}>
               <Grid.Row>

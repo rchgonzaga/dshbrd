@@ -47,42 +47,44 @@ export class HomeContainer extends Container {
 
         let obj = data
         let line = 'SUBJECT;L2 START - INC/WO;CREATED_AT;L2 - WO;CREATED_AT;CLOSED_AT;L3 START - JIRA; CREATED_AT; ASSINED_AD; CLOSED_AT;\n'
-        obj.map((item, index) => {
+        if(obj) {
+            obj.map((item, index) => {
 
-            count++
+                count++
 
-            line += item.pai_product_model_version + ';'
+                line += item.pai_product_model_version + ';'
 
-            if (item.relations.length > 0) {
-                let min = _.minBy(item.relations, function (o) { return o.filho_submit_date; })
-                if (min) {
-                    // console.log('INICIO L2: ' + min.filho_ticket_number + ' - submit_date: ', min.filho_submit_date)
-                    line += (min.filho_ticket_number ? min.filho_ticket_number : 'N/A') + ';' + (min.filho_submit_date ? min.filho_submit_date : 'N/A') + ';'
+                if (item.relations.length > 0) {
+                    let min = _.minBy(item.relations, function (o) { return o.filho_submit_date; })
+                    if (min) {
+                        // console.log('INICIO L2: ' + min.filho_ticket_number + ' - submit_date: ', min.filho_submit_date)
+                        line += (min.filho_ticket_number ? min.filho_ticket_number : 'N/A') + ';' + (min.filho_submit_date ? min.filho_submit_date : 'N/A') + ';'
 
-                    // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', min.pai_submit_date, ' - pai_date_closed: ', min.pai_closed_date)
-                    line += (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (min.pai_submit_date ? min.pai_submit_date : 'N/A') + ';' + (min.pai_closed_date ? min.pai_closed_date : 'N/A') + ';'
+                        // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', min.pai_submit_date, ' - pai_date_closed: ', min.pai_closed_date)
+                        line += (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (min.pai_submit_date ? min.pai_submit_date : 'N/A') + ';' + (min.pai_closed_date ? min.pai_closed_date : 'N/A') + ';'
+                    } else {
+                        // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', item.pai_submit_date, ' - pai_date_closed: ', item.pai_closed_date)
+                        line += ';;' + (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (item.pai_submit_date ? item.pai_submit_date : 'N/A') + ';' + (item.pai_closed_date ? item.pai_closed_date : 'N/A') + ';'
+                    }
                 } else {
-                    // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', item.pai_submit_date, ' - pai_date_closed: ', item.pai_closed_date)
-                    line += ';;' + (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (item.pai_submit_date ? item.pai_submit_date : 'N/A') + ';' + (item.pai_closed_date ? item.pai_closed_date : 'N/A') + ';'
+                    // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', item.pai_submit_date, ' - pai_last_modified_date: ', item.pai_last_modified_date, ' - filho_updated_date: ', item.filho_updated_date)
+                    line += ';;' + (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (item.pai_submit_date ? item.pai_submit_date : 'N/A') + ';' + (item.pai_last_modified_date ? item.pai_last_modified_date : 'N/A') + ';' + (item.filho_updated_date ? item.filho_updated_date : 'N/A') + ';'
                 }
-            } else {
-                // console.log('INICIO L2: ' + item.ticket_number + ' - submit_date: ', item.pai_submit_date, ' - pai_last_modified_date: ', item.pai_last_modified_date, ' - filho_updated_date: ', item.filho_updated_date)
-                line += ';;' + (item.ticket_number ? item.ticket_number : 'N/A') + ';' + (item.pai_submit_date ? item.pai_submit_date : 'N/A') + ';' + (item.pai_last_modified_date ? item.pai_last_modified_date : 'N/A') + ';' + (item.filho_updated_date ? item.filho_updated_date : 'N/A') + ';'
-            }
 
-            item.relations.map((ritem, rindex) => {
-                if (ritem.pai_vendor_ticket_number !== 'null') {
-                    // console.log('JIRA filho_ticket_number: ', (ritem.pai_vendor_ticket_number !== 'null' ? ritem.pai_vendor_ticket_number : ritem.filho_ticket_number), ' - filho_submit_date: ', ritem.filho_submit_date, ' - filho_updated_date: ', ritem.filho_updated_date, ' - filho_closed_date:', ritem.filho_closed_date)
-                    line += (ritem.pai_vendor_ticket_number !== 'null' ? ritem.pai_vendor_ticket_number : ritem.filho_ticket_number) + ';' + (ritem.filho_submit_date ? ritem.filho_submit_date : 'N/A') + ';' + (ritem.filho_updated_date ? ritem.filho_updated_date : 'N/A') + ';' + (ritem.filho_closed_date ? ritem.filho_closed_date : 'N/A') + ';'
-                } else {
-                    // console.log('REMEDY filho_ticket_number: ', (ritem.pai_vendor_ticket_number !== 'null' ? ritem.pai_vendor_ticket_number : ritem.filho_ticket_number), ' - filho_submit_date: ', ritem.filho_submit_date, ' - filho_updated_date: ', ritem.filho_updated_date, ' - filho_closed_date:',  ritem.filho_closed_date)  
-                }
+                item.relations.map((ritem, rindex) => {
+                    if (ritem.pai_vendor_ticket_number !== 'null') {
+                        // console.log('JIRA filho_ticket_number: ', (ritem.pai_vendor_ticket_number !== 'null' ? ritem.pai_vendor_ticket_number : ritem.filho_ticket_number), ' - filho_submit_date: ', ritem.filho_submit_date, ' - filho_updated_date: ', ritem.filho_updated_date, ' - filho_closed_date:', ritem.filho_closed_date)
+                        line += (ritem.pai_vendor_ticket_number !== 'null' ? ritem.pai_vendor_ticket_number : ritem.filho_ticket_number) + ';' + (ritem.filho_submit_date ? ritem.filho_submit_date : 'N/A') + ';' + (ritem.filho_updated_date ? ritem.filho_updated_date : 'N/A') + ';' + (ritem.filho_closed_date ? ritem.filho_closed_date : 'N/A') + ';'
+                    } else {
+                        // console.log('REMEDY filho_ticket_number: ', (ritem.pai_vendor_ticket_number !== 'null' ? ritem.pai_vendor_ticket_number : ritem.filho_ticket_number), ' - filho_submit_date: ', ritem.filho_submit_date, ' - filho_updated_date: ', ritem.filho_updated_date, ' - filho_closed_date:',  ritem.filho_closed_date)  
+                    }
+                })
+                line += '\n'
+                // console.log('\n')
+
+
             })
-            line += '\n'
-            // console.log('\n')
-
-
-        })
+        }
         // console.log(count)
         return line.replace(/null/g, '').replace(/N\/A/g, '')
 
@@ -100,7 +102,6 @@ export class HomeContainer extends Container {
             isLoadingSession: true
         })
         Sessions.getSession(port).then(data => {
-            
             // Treat the data to keep the root ticket opened if the child ticket is opened 
             if (data !== undefined) {
                 data.map((item, index) => {
