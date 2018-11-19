@@ -136,8 +136,6 @@ export class HomeContainer extends Container {
 
             let result = endDate.diff(startDate, 'days');
 
-            // console.log(result > -1 ? result : '');
-
             sumAverage.push({group: toGroup, days: (result > -1 ? result : 0)})
 
             return toGroup
@@ -150,16 +148,22 @@ export class HomeContainer extends Container {
                 waitingUser: (toSplit['Wating user'] != undefined ? toSplit['Wating user'].length : 0)
             })
 
-            var types = _.groupBy(sumAverage, 'group');
-            var resultTypes = _.map(types, (val, key) => {
+            let resultTypes = _.map(_.groupBy(sumAverage, 'group'), (val, key) => {
                 return _.reduce(val, (memo, v) => {
                     return memo + v.days; 
                 }, 0) / val.length;
             });
+            
+            console.log(
+                resultTypes
+            )
 
             toAnotherBar.map((item, index) => {
-                toAnotherBar[index] = {...item, average: resultTypes[index]}
-                toAnotherBar[index].subject = toAnotherBar[index].subject + ' (avg ' + (Math.round(resultTypes[index])+'') + ' days)'
+                toAnotherBar[index] = {
+                    ...item, 
+                    average: resultTypes[index], 
+                    avg: item.subject + ' (avg ' + (Math.round(resultTypes[index])+'') + ' days)'
+                }
             })
 
         });
