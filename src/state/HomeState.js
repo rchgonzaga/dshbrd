@@ -23,8 +23,23 @@ export class HomeContainer extends Container {
             subjectNumer: 0,
             count: 10,
             showPopup: false,
-            selectedTicket: null
+            selectedTicket: null,
+
+            isCurrentStatusLoading: false,
+            currentStatus: {}
         }
+
+
+        const start = () => {
+            setTimeout(() => {
+                this.getCurrentStatus(8080)
+                start()
+            }, 5000)
+        }
+        
+        // Begins
+        start()
+
     }
 
     /**
@@ -149,6 +164,30 @@ export class HomeContainer extends Container {
         })
     }
 
+
+    /**
+     * Info: Call the api responsible for populating all the current dashboard
+     * Required data: none
+     * Optional data: none
+     * @TODO: Extract the part where it changes the data to keep the main ticket (father) opened if it has any child opened
+     */
+    getCurrentStatus(port) {
+        // console.log('getCurrentSession')
+        this.setState({
+            isCurrentStatusLoading: true
+        })
+        Sessions.getCurrentJiraStatus(port).then(data => {
+            console.log(data)
+            this.setState({
+                currentStatus: data
+            },
+            () => {
+                this.setState({
+                    isCurrentStatusLoading: false
+                })
+            })
+        })
+    }
     /**
      * TODO: Remove it
      */

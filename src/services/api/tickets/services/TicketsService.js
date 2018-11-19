@@ -6,7 +6,7 @@ export default class TicketsService {
    * @returns {Promise}
    */
   async getSession(port) {
-    let data = await fetchWithTimeout(`http://10.183.120.7:${port}/relations`)
+    let data = await fetchWithTimeout(`http://10.184.248.106:${port}/relations`)
       .then(res => {
         return res.json();
       })
@@ -20,7 +20,7 @@ export default class TicketsService {
    * @returns {Promise}
    */
   async getCurrentJiraStatus(port) {
-    let data = await fetchWithTimeout(`http://10.183.120.7:${port}/updatejiraboardsstatus`)
+    let data = await fetchWithTimeout(`http://10.184.248.106:${port}/boardsstatus`)
       .then(res => {
         return res.json();
       })

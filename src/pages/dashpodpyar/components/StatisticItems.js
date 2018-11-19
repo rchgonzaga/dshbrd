@@ -39,13 +39,13 @@ const StatisticItems = (props) => {
             <Statistic color='black'>
                 <Statistic.Value >
                     <Icon name='chess rock' />{props.data.totalL3LegacyOpen}</Statistic.Value>
-                <Statistic.Label>L3 Legacy</Statistic.Label>
+                <Statistic.Label>L3 POD AR</Statistic.Label>
             </Statistic>
 
             <Statistic color='blue'>
                 <Statistic.Value >
                     <Icon name='cloud' />{props.data.totalL3CloudOpen}</Statistic.Value>
-                <Statistic.Label>L3 Cloud</Statistic.Label>
+                <Statistic.Label>L3 POD PY</Statistic.Label>
             </Statistic>
 
         </Statistic.Group>

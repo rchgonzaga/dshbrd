@@ -177,7 +177,7 @@ class RoutesChild extends React.Component {
                   display: globalApi.state.loggedIn ? "" : "none",
                   backgroundColor: "#055885"
                 }}
-              >
+              >{/*
                 <Menu.Item as="a">
                   <Icon name="home" />
                   <Counter />
@@ -190,7 +190,7 @@ class RoutesChild extends React.Component {
                   <Icon name="camera" />
                   Channels
                   <Counter />
-                </Menu.Item>
+                </Menu.Item>*/}
               </Sidebar>
             ) : (
               ""

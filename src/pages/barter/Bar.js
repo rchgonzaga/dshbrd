@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Button, Statistic} from "semantic-ui-react"
+import { Grid, Button, Icon} from "semantic-ui-react"
 
 // Import our Api Service Subscriber
 import Api, { ApiSubscribe } from "../../state/Api"
@@ -21,7 +21,7 @@ class HomeChild extends React.Component {
     this.handleModal = this.handleModal.bind(this)
   }
   componentDidMount() {
-    this.props.api.getCurrentSession(8080)
+    this.props.api.getCurrentSession(8888)
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -43,8 +43,8 @@ class HomeChild extends React.Component {
         {/* NORMAL STATE */}
         {api.state.isLoadingSession === false ? (
           <div>
-            <h2>
-              Barter -{" "}
+            <h3>
+              ITS Cloud & Legacy -{" "}
               <span style={{ color: "grey" }}>
                 01/06/2018 ~ {new Date().toLocaleDateString("pt-BR")}
               </span>
@@ -61,11 +61,15 @@ class HomeChild extends React.Component {
                   Tickets - Excel
                 </CSVLink>
 
-                <Button secondary onClick={() => api.getCurrentSession()}>
+                <Button secondary onClick={() => api.getCurrentSession(8080)}>
                   Update Grid
                 </Button>
               </span>
-            </h2>
+              &nbsp;&nbsp; &nbsp;&nbsp; Status: 
+              <Icon name='dot circle' color={api.state.currentStatus["LEGACY ITS"] === true ? "grey" : "olive"}/> Legacy | 
+              <Icon name='dot circle' color={api.state.currentStatus["CLOUD ITS"] === true ? "grey" : "olive"}/> Cloud | 
+              <Icon name='dot circle' color={api.state.currentStatus["CLOUD BARTER"] === true ? "grey" : "olive"}/> Barter
+            </h3>
             <Hr />
             {/*
             <Statistic.Group widths='five'>
@@ -96,9 +100,9 @@ class HomeChild extends React.Component {
               </Statistic>
 
             </Statistic.Group>
+            <Hr />
             */}
 
-            <Hr />
 
             <Grid columns={3}>
               <Grid.Row>
