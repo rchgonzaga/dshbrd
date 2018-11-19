@@ -1,7 +1,7 @@
 import { Container } from "unstated"
 import Sessions from '../services/api/tickets/index'
 import _ from 'lodash'
-import { CSVDownload  } from "react-csv";
+import moment from 'moment'
 
 import UNSTATED from "unstated-debug"
 UNSTATED.logStateChanges = false
@@ -103,6 +103,68 @@ export class HomeContainer extends Container {
         // console.log(count)
         return line.replace(/null/g, '').replace(/N\/A/g, '')
 
+    }
+
+    calculateAVDDays(){
+
+        // GROUP FOR SUBJECT GRAPH
+        let toAnotherBar = []
+        let sumAverage = [] 
+
+        _.forEach(_.groupBy(this.state.ticketList, i => {
+
+            let tmpSplit = (i.pai_product_model_version != null ? i.pai_product_model_version.split('/') : '')
+            let splt = tmpSplit.length > 1 ? tmpSplit[0] : i.pai_product_model_version
+
+            let toGroup = splt === 'ITS-Relatórios'           ? 'ITS-Relatórios' :
+                            splt === 'ITS-Relatório'            ? 'ITS-Relatórios' :
+                            splt === 'ITS-Webservice'           ? 'ITS-Webservice' :
+                            splt === 'ITS-WebService'           ? 'ITS-Webservice' :
+                            splt === 'ITS-Indisponibilidade'    ? 'ITS-Indisponibilidade' :
+                            splt === 'ITS- Indisponibilidade'   ? 'ITS-Indisponibilidade' :
+                            splt === 'ITS' ? i.pai_product_model_version :
+                            // splt === 'ITS-Agricultor' ? i.pai_product_model_version :
+                splt
+
+            // console.log(" ------------ ", toGroup)
+
+            let startDate = moment(i.pai_submit_date, "YYYY-MM-DD");
+            let endDate = moment(i.pai_closed_date, "YYYY-MM-DD");
+            if (i.pai_closed_date == 'null') {
+                endDate = moment(moment(Date()).format('YYYY-MM-DD'), "YYYY-MM-DD");
+            }
+
+            let result = endDate.diff(startDate, 'days');
+
+            // console.log(result > -1 ? result : '');
+
+            sumAverage.push({group: toGroup, days: (result > -1 ? result : 0)})
+
+            return toGroup
+        }), (value, key) => {
+            let toSplit = _.groupBy(value, z => z.pai_status)
+            toAnotherBar.push({
+                subject: key,
+                open: (toSplit['Open'] != undefined ? toSplit['Open'].length : 0),
+                closed: (toSplit['Closed'] != undefined ? toSplit['Closed'].length : 0),
+                waitingUser: (toSplit['Wating user'] != undefined ? toSplit['Wating user'].length : 0)
+            })
+
+            var types = _.groupBy(sumAverage, 'group');
+            var resultTypes = _.map(types, (val, key) => {
+                return _.reduce(val, (memo, v) => {
+                    return memo + v.days; 
+                }, 0) / val.length;
+            });
+
+            toAnotherBar.map((item, index) => {
+                toAnotherBar[index] = {...item, average: resultTypes[index]}
+                toAnotherBar[index].subject = toAnotherBar[index].subject + ' (avg ' + (Math.round(resultTypes[index])+'') + ' days)'
+            })
+
+        });
+        
+        console.log(toAnotherBar)
     }
 
     /**

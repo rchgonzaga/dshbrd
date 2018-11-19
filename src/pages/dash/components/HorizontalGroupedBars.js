@@ -24,7 +24,7 @@ export class HorizontalGroupedBars extends React.Component {
             open:         status['Open'] ? status['Open'].length : 0
           }
 
-          if((newItem.closed + newItem.waitinguser + newItem.open) > 1 && newItem.subject !== 'undefined') {
+          if((newItem.waitinguser + newItem.open) > 1 && newItem.subject !== 'undefined') {
             arr.push( newItem )
           }
 
@@ -46,7 +46,7 @@ export class HorizontalGroupedBars extends React.Component {
       >
         <ResponsiveBar
           data={this.state.innerData}
-          keys={[  "waitinguser", "closed", "open"]}
+          keys={[ "open", "waitinguser"]}
           indexBy="subject"
           margin={{ top: 5, right: 180, bottom: 100, left: 200 }}
           layout="horizontal"

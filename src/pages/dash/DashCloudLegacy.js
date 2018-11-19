@@ -64,6 +64,10 @@ class HomeChild extends React.Component {
                 <Button secondary onClick={() => api.getCurrentSession(8080)}>
                   Update Grid
                 </Button>
+
+                <Button secondary onClick={() => api.calculateAVDDays()}>
+                  AVG Days
+                </Button>
               </span>
               &nbsp;&nbsp; &nbsp;&nbsp; Status: 
               <Icon name='dot circle' color={api.state.currentStatus["LEGACY ITS"] === true ? "grey" : "olive"}/> Legacy | 
