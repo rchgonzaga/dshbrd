@@ -62,11 +62,7 @@ class HomeChild extends React.Component {
                 </CSVLink>
 
                 <Button secondary onClick={() => api.getCurrentSession(8080)}>
-                  Update Grid
-                </Button>
-
-                <Button secondary onClick={() => api.calculateAVDDays()}>
-                  AVG Days
+                  Refresh
                 </Button>
               </span>
               &nbsp;&nbsp; &nbsp;&nbsp; Status: 
@@ -133,6 +129,7 @@ class HomeChild extends React.Component {
                 <Grid.Column>
                   <HorizontalGroupedBars
                     data={api.state.ticketList}
+                    dataAVG={api.state.ticketListAVG}
                     width={window.innerWidth / 3}
                     height={window.innerHeight / 1.8}
                   />

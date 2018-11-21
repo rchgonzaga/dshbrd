@@ -3,14 +3,14 @@ import { Grid, Button, Icon} from "semantic-ui-react"
 
 // Import our Api Service Subscriber
 import Api, { ApiSubscribe } from "../../state/Api"
-import { PieChart } from "../dash/components/PieChart"
+import { PieChart } from "../dashpodpyar/components/PieChart"
 import Hr from "../../components/Hr"
 import LoaderSpinner from "../../components/Loader"
-import { HorizontalGroupedBars } from "../dash/components/HorizontalGroupedBars"
-import StatisticItems from "../dash/components/StatisticItems"
-import MainGrid from "../dash/components/MainGrid"
+import { HorizontalGroupedBars } from "../dashpodpyar/components/HorizontalGroupedBars"
+import StatisticItems from "../dashpodpyar/components/StatisticItems"
+import MainGrid from "../dashpodpyar/components/MainGrid"
 import HomeApi from "../../state/HomeState"
-import UserFaces from "../dash/components/UserFaces"
+import UserFaces from "../dashpodpyar/components/UserFaces"
 import ModalScrollingExample from "./components/ModalScrollingExample"
 import { CSVLink  } from "react-csv";
 
@@ -44,7 +44,7 @@ class HomeChild extends React.Component {
         {api.state.isLoadingSession === false ? (
           <div>
             <h3>
-              ITS Cloud & Legacy -{" "}
+              POD PY & AG -{" "}
               <span style={{ color: "grey" }}>
                 01/06/2018 ~ {new Date().toLocaleDateString("pt-BR")}
               </span>
@@ -61,8 +61,8 @@ class HomeChild extends React.Component {
                   Tickets - Excel
                 </CSVLink>
 
-                <Button secondary onClick={() => api.getCurrentSession(8080)}>
-                  Update Grid
+                <Button secondary onClick={() => api.getCurrentSession(8088)}>
+                  Refresh
                 </Button>
               </span>
               &nbsp;&nbsp; &nbsp;&nbsp; Status: 
@@ -129,6 +129,7 @@ class HomeChild extends React.Component {
                 <Grid.Column>
                   <HorizontalGroupedBars
                     data={api.state.ticketList}
+                    dataAVG={api.state.ticketListAVG}
                     width={window.innerWidth / 3}
                     height={window.innerHeight / 1.8}
                   />
@@ -157,13 +158,12 @@ class HomeChild extends React.Component {
                 ).length,
                 totalL3LegacyOpen: api.state.ticketList.filter(
                   ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' &&
-                    ticket.pai_status === 'Open' &&
-                    ticket.pai_product.search('Legacy Value Capture Retailer') === 0
+                  ticket.pai_status === 'Open' &&
+                  (ticket.pai_product_model_version ? ticket.pai_product_model_version.indexOf('PY') > 0 : '')
                 ).length,
                 totalL3CloudOpen: api.state.ticketList.filter(
                   ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' &&
-                    ticket.pai_status === 'Open' &&
-                    ticket.pai_product.search('Value Capture') === 0
+                  ticket.pai_status === 'Open'
                 ).length
               }}
             />
