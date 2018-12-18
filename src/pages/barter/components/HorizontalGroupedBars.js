@@ -31,14 +31,9 @@ export class HorizontalGroupedBars extends React.Component {
     })
 
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   // only update chart if the data has changed
-  //   if (prevProps.data !== this.state) {
-  //     console.log(prevProps, prevState)
-  //   }
-  // }
-  
+  /**
+   * 
+   */
   calculateAVDDays(){
 
       // GROUP FOR SUBJECT GRAPH
@@ -62,7 +57,7 @@ export class HorizontalGroupedBars extends React.Component {
 
           let startDate = moment(i.pai_submit_date, "YYYY-MM-DD");
           let endDate = moment(i.pai_closed_date, "YYYY-MM-DD");
-          if (i.pai_closed_date == 'null') {
+          if (i.pai_closed_date === 'null') {
               endDate = moment(moment(Date()).format('YYYY-MM-DD'), "YYYY-MM-DD");
           }
 
@@ -75,9 +70,9 @@ export class HorizontalGroupedBars extends React.Component {
           let toSplit = _.groupBy(value, z => z.pai_status)
           toAnotherBar.push({
               subject: key,
-              open: (toSplit['Open'] != undefined ? toSplit['Open'].length : 0),
-              closed: (toSplit['Closed'] != undefined ? toSplit['Closed'].length : 0),
-              waitingUser: (toSplit['Wating user'] != undefined ? toSplit['Wating user'].length : 0)
+              open: (toSplit['Open'] !== undefined ? toSplit['Open'].length : 0),
+              closed: (toSplit['Closed'] !== undefined ? toSplit['Closed'].length : 0),
+              waitingUser: (toSplit['Wating user'] !== undefined ? toSplit['Wating user'].length : 0)
           })
 
           let resultTypes = _.map(_.groupBy(sumAverage, 'group'), (val, key) => {
@@ -87,10 +82,10 @@ export class HorizontalGroupedBars extends React.Component {
           });
 
           toAnotherBar.map((item, index) => {
-              toAnotherBar[index] = {
+              return toAnotherBar[index] = {
                   ...item, 
                   average: resultTypes[index], 
-                  avg: item.subject + ' (avg ' + (Math.round(resultTypes[index])+'') + ' days)'
+                  avg: `${item.subject} (avg ${(Math.round(resultTypes[index])+'')} days)`
               }
           })
 

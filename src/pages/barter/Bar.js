@@ -3,14 +3,14 @@ import { Grid, Button, Icon} from "semantic-ui-react"
 
 // Import our Api Service Subscriber
 import Api, { ApiSubscribe } from "../../state/Api"
-import { PieChart } from "../dash/components/PieChart"
+import { PieChart } from "../barter/components/PieChart"
 import Hr from "../../components/Hr"
 import LoaderSpinner from "../../components/Loader"
 import { HorizontalGroupedBars } from "../barter/components/HorizontalGroupedBars"
-import StatisticItems from "../dash/components/StatisticItems"
-import MainGrid from "../dash/components/MainGrid"
+import StatisticItems from "../barter/components/StatisticItems"
+import MainGrid from "../barter/components/MainGrid"
 import HomeApi from "../../state/HomeState"
-import UserFaces from "../dash/components/UserFaces"
+import UserFaces from "../barter/components/UserFaces"
 import ModalScrollingExample from "./components/ModalScrollingExample"
 import { CSVLink  } from "react-csv";
 
@@ -21,7 +21,7 @@ class HomeChild extends React.Component {
     this.handleModal = this.handleModal.bind(this)
   }
   componentDidMount() {
-    this.props.api.getCurrentSession(8888)
+    this.props.api.getCurrentSession('barter')
   }
 
   // componentDidUpdate(prevProps, prevState) {

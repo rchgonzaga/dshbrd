@@ -69,7 +69,7 @@ export default (props) => {
             <br />
             {
               ((totalRestDay + (total - (totalRestDay+totalOneDay+totalThreeDay))) / total * 100).toFixed(1)
-            }% <br/>issues resolved within 7 or more days
+            }% <br/>issues resolved within 3 or more days
           </Grid.Column>
         </Grid.Row>
       </Grid>

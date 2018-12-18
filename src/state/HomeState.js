@@ -1,7 +1,6 @@
 import { Container } from "unstated"
 import Sessions from '../services/api/tickets/index'
 import _ from 'lodash'
-import moment from 'moment'
 
 import UNSTATED from "unstated-debug"
 UNSTATED.logStateChanges = false
@@ -33,7 +32,7 @@ export class HomeContainer extends Container {
 
         const start = () => {
             setTimeout(() => {
-                this.getCurrentStatus(8080)
+                this.getCurrentStatus('all')
                 start()
             }, 5000)
         }
@@ -57,7 +56,6 @@ export class HomeContainer extends Container {
      * @TODO: Refector this function and make the dashbard download the CSV file
      */
     extractSLAS() {
-        let count = 0
 
         let data = this.state.ticketList
 
@@ -65,8 +63,6 @@ export class HomeContainer extends Container {
         let line = 'SUBJECT;L2 START - INC/WO;CREATED_AT;L2 - WO;CREATED_AT;CLOSED_AT;L3 START - JIRA; CREATED_AT; ASSINED_AD; CLOSED_AT;\n'
         if(obj) {
             obj.map((item, index) => {
-
-                count++
 
                 line += item.pai_product_model_version + ';'
 
@@ -96,8 +92,6 @@ export class HomeContainer extends Container {
                     }
                 })
                 line += '\n'
-                // console.log('\n')
-
 
             })
         }
@@ -135,7 +129,7 @@ export class HomeContainer extends Container {
 
                         item.relations.map((citem, cindex) => {
 
-                            if (citem.filho_status.trim() !== 'Done' && citem.filho_status.trim() != 'Closed' && citem.filho_status.trim() != 'Resolved' && citem.filho_status.trim() != null) {
+                            if (citem.filho_status.trim() !== 'Done' && citem.filho_status.trim() !== 'Closed' && citem.filho_status.trim() !== 'Resolved' && citem.filho_status.trim() != null) {
                                 item.pai_status = 'Open'
                                 item.pai_closed_date = 'null'
                             }

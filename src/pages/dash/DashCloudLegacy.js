@@ -21,7 +21,7 @@ class HomeChild extends React.Component {
     this.handleModal = this.handleModal.bind(this)
   }
   componentDidMount() {
-    this.props.api.getCurrentSession(8080)
+    this.props.api.getCurrentSession('itscloud')
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -61,7 +61,7 @@ class HomeChild extends React.Component {
                   Tickets - Excel
                 </CSVLink>
 
-                <Button secondary onClick={() => api.getCurrentSession(8080)}>
+                <Button secondary onClick={() => api.getCurrentSession('itscloud')}>
                   Refresh
                 </Button>
               </span>

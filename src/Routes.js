@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
-import { Icon, Menu, Container, Sidebar, Dropdown } from "semantic-ui-react"
+import { Menu, Container, Sidebar } from "semantic-ui-react"
 import { Subscribe } from "unstated"
 
 import Api from "./state/Api"
@@ -9,7 +9,6 @@ import Api from "./state/Api"
 import DashCloudLegacy from "./pages/dash/DashCloudLegacy"
 import podpyar from "./pages/dashpodpyar/DashPodPyAr"
 import Bar from "./pages/barter/Bar"
-import Counter from "./components/Counter"
 import LoginLogoutButton from "./components/LoginLogoutButtons"
 
 class RoutesChild extends React.Component {
@@ -223,7 +222,7 @@ class RoutesChild extends React.Component {
 }
 
 export default function Routes() {
-  const [name, setName] = useState("Dashboards - If you can't measure it, you can't improve it.")
+  const [name] = useState("Dashboards - If you can't measure it, you can't improve it.")
 
   useEffect(() => {
     document.title = name
