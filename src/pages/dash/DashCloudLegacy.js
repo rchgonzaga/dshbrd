@@ -14,6 +14,9 @@ import UserFaces from "../dash/components/UserFaces"
 import ModalScrollingExample from "./components/ModalScrollingExample"
 import { CSVLink  } from "react-csv";
 
+import { observer, inject } from 'mobx-react'
+
+@observer
 class HomeChild extends React.Component {
 
   constructor(props){
