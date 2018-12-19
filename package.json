@@ -8,6 +8,8 @@
     "json-prune": "^1.1.0",
     "lodash": "^4.17.11",
     "match-sorter": "^2.3.0",
+    "mobx": "^5.8.0",
+    "mobx-react": "^5.4.3",
     "moment": "^2.22.2",
     "nivo": "^0.31.0",
     "react": "^16.7.0-alpha.0",
