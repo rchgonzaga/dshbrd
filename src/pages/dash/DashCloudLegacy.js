@@ -14,8 +14,10 @@ import UserFaces from "../dash/components/UserFaces"
 import ModalScrollingExample from "./components/ModalScrollingExample"
 import { CSVLink  } from "react-csv";
 
-import { observer, inject } from 'mobx-react'
 
+import { inject, observer } from "mobx-react";
+
+@inject("UiStore", "Timer")
 @observer
 class HomeChild extends React.Component {
 
@@ -23,6 +25,7 @@ class HomeChild extends React.Component {
     super(props)
     this.handleModal = this.handleModal.bind(this)
   }
+
   componentDidMount() {
     this.props.api.getCurrentSession('itscloud')
   }
@@ -39,15 +42,16 @@ class HomeChild extends React.Component {
   }
 
   render() {
-    let { api, globalApi } = this.props
+    let { state, api, globalApi, UiStore, Timer} = this.props
+    console.log(this.props)
 
     return (
       <div>
         {/* NORMAL STATE */}
-        {api.state.isLoadingSession === false ? (
+        {state.isLoadingSession === false ? (
           <div>
             <h3>
-              ITS Cloud & Legacy -{" "}
+              {/*UiStore.theme*/}{/*Timer.start*/}ITS Cloud & Legacy -{" "}
               <span style={{ color: "grey" }}>
                 01/06/2018 ~ {new Date().toLocaleDateString("pt-BR")}
               </span>
@@ -60,18 +64,24 @@ class HomeChild extends React.Component {
                   SLA - Excel
                 </CSVLink>
                 
-                <CSVLink className="ui primary button" data={api.state.ticketList} filename={"Tickets.csv"} separator={";"}>
+                <CSVLink className="ui primary button" data={state.ticketList} filename={"Tickets.csv"} separator={";"}>
                   Tickets - Excel
                 </CSVLink>
 
                 <Button secondary onClick={() => api.getCurrentSession('itscloud')}>
                   Refresh
                 </Button>
+
+                <Button secondary onClick={() => UiStore.toggleTheme()}>
+                  Teste
+                </Button>
+
+
               </span>
               &nbsp;&nbsp; &nbsp;&nbsp; Status: 
-              <Icon name='dot circle' color={api.state.currentStatus["LEGACY ITS"] === true ? "grey" : "olive"}/> Legacy | 
-              <Icon name='dot circle' color={api.state.currentStatus["CLOUD ITS"] === true ? "grey" : "olive"}/> Cloud | 
-              <Icon name='dot circle' color={api.state.currentStatus["CLOUD BARTER"] === true ? "grey" : "olive"}/> Barter
+              <Icon name='dot circle' color={state.currentStatus["LEGACY ITS"] === true ? "grey" : "olive"}/> Legacy | 
+              <Icon name='dot circle' color={state.currentStatus["CLOUD ITS"] === true ? "grey" : "olive"}/> Cloud | 
+              <Icon name='dot circle' color={state.currentStatus["CLOUD BARTER"] === true ? "grey" : "olive"}/> Barter
             </h3>
             <Hr />
             {/*
@@ -115,13 +125,13 @@ class HomeChild extends React.Component {
                       {
                         id: "Opened",
                         label: "Opened",
-                        value: api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
+                        value: state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
                         color: "hsl(145, 70%, 50%)"
                       },
                       {
                         id: "Waiting",
                         label: "Waiting",
-                        value: api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
+                        value: state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
                         color: "hsl(225, 70%, 50%)"
                       }
                     ]}
@@ -131,8 +141,8 @@ class HomeChild extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <HorizontalGroupedBars
-                    data={api.state.ticketList}
-                    dataAVG={api.state.ticketListAVG}
+                    data={state.ticketList}
+                    dataAVG={state.ticketListAVG}
                     width={window.innerWidth / 3}
                     height={window.innerHeight / 1.8}
                   />
@@ -140,10 +150,10 @@ class HomeChild extends React.Component {
                 <Grid.Column>
                   <UserFaces 
                     data={{
-                      total: api.state.ticketList.length,
-                      totalOneDay: (api.state.ticketList.filter(ticket => parseFloat(ticket.pai_age) <= 1).length),
-                      totalThreeDay: (api.state.ticketList.filter(ticket => parseFloat(ticket.pai_age) > 1 && parseFloat(ticket.pai_age) <= 3).length),
-                      totalRestDay: (api.state.ticketList.filter(ticket => parseFloat(ticket.pai_age) >= 4).length)
+                      total: state.ticketList.length,
+                      totalOneDay: (state.ticketList.filter(ticket => parseFloat(ticket.pai_age) <= 1).length),
+                      totalThreeDay: (state.ticketList.filter(ticket => parseFloat(ticket.pai_age) > 1 && parseFloat(ticket.pai_age) <= 3).length),
+                      totalRestDay: (state.ticketList.filter(ticket => parseFloat(ticket.pai_age) >= 4).length)
                     }}
                   />
                 </Grid.Column>
@@ -152,19 +162,19 @@ class HomeChild extends React.Component {
             <Hr />
             <StatisticItems
               data={{
-                originalActivities: api.state.ticketList,
-                totalSubjectClosed: api.state.ticketList.filter(ticket => ticket.pai_status === 'Closed').length,
-                totalSubjectOpen: api.state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
-                totalSubjectWaitingUser: api.state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
-                totalL2Open: api.state.ticketList.filter(
+                originalActivities: state.ticketList,
+                totalSubjectClosed: state.ticketList.filter(ticket => ticket.pai_status === 'Closed').length,
+                totalSubjectOpen: state.ticketList.filter(ticket => ticket.pai_status === 'Open').length,
+                totalSubjectWaitingUser: state.ticketList.filter(ticket => ticket.pai_status === 'Wating user').length,
+                totalL2Open: state.ticketList.filter(
                   ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L2' && ticket.pai_status === 'Open'
                 ).length,
-                totalL3LegacyOpen: api.state.ticketList.filter(
+                totalL3LegacyOpen: state.ticketList.filter(
                   ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' &&
                     ticket.pai_status === 'Open' &&
                     ticket.pai_product.search('Legacy Value Capture Retailer') === 0
                 ).length,
-                totalL3CloudOpen: api.state.ticketList.filter(
+                totalL3CloudOpen: state.ticketList.filter(
                   ticket => ticket.pai_assigned_group.substring(ticket.pai_assigned_group.length - 3).trim() === 'L3' &&
                     ticket.pai_status === 'Open' &&
                     ticket.pai_product.search('Value Capture') === 0
@@ -174,11 +184,11 @@ class HomeChild extends React.Component {
 
             <Hr />
             <MainGrid
-              data={api.state.ticketList}
+              data={state.ticketList}
               onDoubleClickRow={ticket => api.selectTicketAndModal({ showPopup: true, selectedTicket: ticket })}
             />
-            {api.state.showPopup  ?
-              (<ModalScrollingExample show={api.state.showPopup} data={api.state.selectedTicket} onClose={this.handleModal}/>) : (
+            {state.showPopup  ?
+              (<ModalScrollingExample show={state.showPopup} data={state.selectedTicket} onClose={this.handleModal}/>) : (
                 <div></div>
               )
             }
@@ -200,7 +210,7 @@ class HomeChild extends React.Component {
 const Home = () => (
   <ApiSubscribe to={[Api, HomeApi]}>
     {(api, homeApi) => {
-      return <HomeChild api={homeApi} globalApi={api} />
+      return <HomeChild {...homeApi} api={homeApi} globalApi={api} />
     }}
   </ApiSubscribe>
 )

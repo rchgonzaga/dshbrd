@@ -9,8 +9,8 @@ UNSTATED.logStateChanges = false
 // Create a Container for our React Context. This container will
 // hold state and methods just like a react component would:
 export class HomeContainer extends Container {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         // The state will be available to any component we inject
         // the Container instance into
