@@ -2,4 +2,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Project Notes
 
-This will be a simple application showing how to you unstated instead of `redux`.
+![ScreenShot](screenshot/dash.png "PrintScreen")
