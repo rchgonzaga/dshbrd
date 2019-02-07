@@ -6,7 +6,7 @@ export default class TicketsService {
    * @returns {Promise}
    */
   async getSession(route) {
-    let data = await fetchWithTimeout(`http://10.183.114.98:8080/relations/${route}`)
+    let data = await fetchWithTimeout(`http://10.88.70.80:8080/relations/${route}`)
       .then(res => {
         return res.json();
       })
@@ -20,7 +20,7 @@ export default class TicketsService {
    * @returns {Promise}
    */
   async getCurrentJiraStatus(route) {
-    let data = await fetchWithTimeout(`http://10.183.114.98:8080/boardsstatus/${route}`)
+    let data = await fetchWithTimeout(`http://10.88.70.80:8080/boardsstatus/${route}`)
       .then(res => {
         return res.json();
       })
